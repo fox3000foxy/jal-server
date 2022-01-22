@@ -14,10 +14,6 @@ function coming(){
 	});
 }
 
-window.addEventListener('beforeunload',()=>{
-	socket.emit('leaving',myId)
-})
-
 socket.on('leaving',(msg)=>{
 	document.getElementById("player"+msg.id).remove()
 })

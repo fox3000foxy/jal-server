@@ -7,6 +7,9 @@
 		<script src="scripts/injector.js"></script>
 		<script>
 		window.addEventListener('load',()=>{inject()})
+		window.addEventListener('beforeunload',()=>{
+			socket.emit('leaving',myId)
+		})
 		</script>
 	</head>
 	<body>
