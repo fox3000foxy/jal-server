@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="./styles/centrify.css">
+		<meta charset="UTF-8">
+		<style>
+			@font-face {
+				 font-family: "8bit";
+				 src: url("./fonts/8bit.ttf")
+			}
+			
+			* {
+				cursor:none;
+				font-family:"8bit";
+				background: black;
+				color:white;
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="center">
+			<p id="logo" style="opacity:0;"></p>
+		</div>
+		<script>
+			redirect = "index.html"
+			if (location.href.indexOf("?")==-1) location.href = "?0"
+			logo = document.getElementById("logo");
+			nb = parseInt(location.href.split("?")[1])
+			document.onkeypress = (ev)=>{
+				location.href = redirect
+			}
+			
+			function generateCredit(label,text) {
+				return `
+					${label}:
+					<br><br><br>
+					<h1>
+						<b>${text}</b>
+					</h1>
+				`
+			}
+			
+			logos = [
+				generateCredit('Un jeu développé par','Vixen Studios'),
+				generateCredit('En collaboration avec','Gokiing Studios'),
+				generateCredit('Et en collaboration avec','Le Monde de Roxas'),
+				'<img src="https://cdn.discordapp.com/attachments/913785499984994345/934430513001799711/cooltext402708520188435.png">'
+			]
+						
+			i=0;
+			logo.innerHTML = logos[nb]
+			setInterval(()=>{
+				if(i<=100) {logo.style.opacity = i+'%'}
+				if(i>=300 && i<=400){logo.style.opacity = (400 - i)+'%'}
+				if(i==500) {
+					if(nb!=logos.length-1) location.href = "?"+(nb+1)
+					else location.href= redirect
+				}
+				i++
+			},10)
+		</script>
+	</body>
+</html>

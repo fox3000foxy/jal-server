@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="styles/isometrify.css">
+		<link rel="stylesheet" href="styles/centrify.css">
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="scripts/Importer.js"></script>
+		<script src="scripts/injector.js"></script>
+		<script>
+		window.addEventListener('load',()=>{inject()})
+		</script>
+	</head>
+	<body>
+		<div id="sky"></div>
+		<div id="mapBox" class="mapBox center" style="
+			left:-340px;
+			top:-152px;
+			width:0px;
+			height:0px
+		">
+			<div id="map" style="position:relative"></div>
+		</div>
+		<div id="players"></div>
+	</body>
+</html>

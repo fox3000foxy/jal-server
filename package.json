@@ -1,0 +1,17 @@
+{
+  "name": "isometrifier-main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^16.0.7",
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
+  }
+}
