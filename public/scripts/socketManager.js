@@ -89,7 +89,7 @@ setInterval(()=>{
 },50)
 
 socket.on('heartbeat',(remainingPlayers)=>{
-  console.log('remainingPlayers:',remainingPlayers)
+  //console.log('remainingPlayers:',remainingPlayers)
   document.querySelectorAll("[id*='player']").forEach(player=>{
     let playerId = player.getAttribute('id').split("player")[1]
     if(remainingPlayers.indexOf(playerId)==-1) {
@@ -102,7 +102,9 @@ socket.on('heartbeat',(remainingPlayers)=>{
 })
 
 socket.on('timeOut',(msg)=>{
+  console.log(myId,msg.id)
   if(myId==msg.id) location.href='menu.html'
+
 })
 
 socket.on('setState',(msg)=>{

@@ -44,16 +44,16 @@ io.on('connection', (socket) => {
   socket.on('movement',(msg)=>{
 	  // console.log("Movement:",msg)
 	  actualPlayers[msg.id] = msg
-    timeOut[msg.id] = 60
+    timeOut[msg.id] = 3
 	  io.emit('movement',msg)
   })
 
   setInterval(()=>{
     Object.keys(timeOut).forEach((key)=>{
       timeOut[key]--
-      if(timeOut[key]==0)
-      io.emit('leaving',{id:parseInt(key)})
-      io.emit('timeOut',parseInt(key))
+      //if(timeOut[key]==0)
+      //io.emit('leaving',{id:parseInt(key)})
+      //io.emit('timeOut',{id:parseInt(key)})
     })
   },1000)
 
