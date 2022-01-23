@@ -1,4 +1,5 @@
 function CreateCharacter(characterElement){
+  if(characterElement==null) return;
 	playersList.appendChild(characterElement)
 	// console.log(characterElement)
 	var me = parseInt(characterElement.getAttribute('me'))

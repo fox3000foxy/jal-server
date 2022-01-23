@@ -1,4 +1,5 @@
 function createPlayer(p){
+  if(getPlayer(p.id)!=null) return;
 	var playerElement = document.createElement('div')
 	playerElement.setAttribute('class','character center')
 	playerElement.setAttribute("player",p.type)

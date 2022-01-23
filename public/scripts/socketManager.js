@@ -89,13 +89,20 @@ setInterval(()=>{
 },50)
 
 socket.on('heartbeat',(remainingPlayers)=>{
-  console.log('remainingPlayers')
+  console.log('remainingPlayers:',remainingPlayers)
   document.querySelectorAll("[id*='player']").forEach(player=>{
-    let playerId = player.getAttribute('id').split("player")
-    if(playerId!='me' && remainingPlayers.indexOf(playerId)) {
-      player.remove()
+    let playerId = player.getAttribute('id').split("player")[1]
+    if(remainingPlayers.indexOf(playerId)==-1) {
+      if(playerId!='me' && playerId!='s'){
+        console.log("Player",playerId,"cleared")
+        player.remove()
+      }
     }
   })
+})
+
+socket.on('timeOut',(msg)=>{
+  if(myId==msg.id) location.href='menu.html'
 })
 
 socket.on('setState',(msg)=>{

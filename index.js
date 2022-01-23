@@ -3,6 +3,7 @@ const mode = process.argv[0]
 const PORT = (process.env.PORT || 4300)
 let id = 0
 let actualPlayers = {}
+let timeOut = {}
 //Server
 const express = require('express')
 const http = require('http');
@@ -43,8 +44,18 @@ io.on('connection', (socket) => {
   socket.on('movement',(msg)=>{
 	  // console.log("Movement:",msg)
 	  actualPlayers[msg.id] = msg
+    timeOut[msg.id] = 60
 	  io.emit('movement',msg)
   })
+
+  setInterval(()=>{
+    Object.keys(timeOut).forEach((key)=>{
+      timeOut[key]--
+      if(timeOut[key]==0)
+      io.emit('leaving',{id:parseInt(key)})
+      io.emit('timeOut',parseInt(key))
+    })
+  },1000)
 
   socket.on('setState',(msg)=>{
 	  // console.log("Movement:",msg)
