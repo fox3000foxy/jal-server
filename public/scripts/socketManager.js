@@ -1,6 +1,6 @@
 var socket = io();
 myId = false
-
+playersAsked = false
 socket.emit('getId', null);
 socket.on('getId', function(msg) {
 	console.log('A new player ask for an ID !')
@@ -31,6 +31,7 @@ socket.on('newPlayer',(msg)=>{
 })
 
 socket.on('askExistingPlayers',(players)=>{
+	if(playersAsked) return;
 	Object.keys(players).forEach((player)=>{
 		if(players[player].id==myId) return;
 		if(getPlayer(players[player].id)!=null) return;
@@ -44,6 +45,7 @@ socket.on('askExistingPlayers',(players)=>{
 			me: 0
 		}))
 	})
+	playersAsked = true
 })
 
 function moving(){
