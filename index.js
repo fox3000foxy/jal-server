@@ -25,6 +25,10 @@ io.on('connection', (socket) => {
 	  console.log("ID",id,"has been gived")
 	  io.emit('getId',{id})
   })
+
+  socket.on('heartbeat',(msg)=>{
+    io.emit('heartbeat',Object.keys(actualPlayers))
+  })
   
   socket.on('coming',(msg)=>{
 	  console.log("Incoming informations:",msg)

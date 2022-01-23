@@ -84,7 +84,19 @@ setInterval(()=>{
 		state: (getPlayer("me").getAttribute('state') || "idle"),
 		id: myId
 	})
+
+  socket.emit('heartbeat',null)
 },50)
+
+socket.on('heartbeat',(remainingPlayers)=>{
+  console.log('remainingPlayers')
+  document.querySelectorAll("[id*='player']").forEach(player=>{
+    let playerId = player.getAttribute('id').split("player")
+    if(playerId!='me' && remainingPlayers.indexOf(playerId)) {
+      player.remove()
+    }
+  })
+})
 
 socket.on('setState',(msg)=>{
 	if(getPlayer(msg.id)==null) return;
