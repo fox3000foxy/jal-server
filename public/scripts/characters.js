@@ -1,8 +1,8 @@
-characterElements = document.querySelectorAll(".character")
-characterElements.forEach(characterElement=>{
+function CreateCharacter(characterElement){
+	playersList.appendChild(characterElement)
 	// console.log(characterElement)
 	var me = parseInt(characterElement.getAttribute('me'))
-	self = {
+	var self = {
 		speed: 16,
 		jumping: false,
 		jumpingFinished: true,
@@ -31,7 +31,7 @@ characterElements.forEach(characterElement=>{
 	if(characterElement.hasAttribute('autoShadow'))
 	characterElement.appendChild(characterShadow)
 	
-	if(localStorage.coordinates){
+	if(localStorage.coordinates && me){
 		if(JSON.parse(localStorage.coordinates).x) mapBox.style.left = JSON.parse(localStorage.coordinates).x
 		if(JSON.parse(localStorage.coordinates).y) mapBox.style.top = JSON.parse(localStorage.coordinates).y
 		if(JSON.parse(localStorage.coordinates).d) self.dir = JSON.parse(localStorage.coordinates).d
@@ -78,11 +78,14 @@ characterElements.forEach(characterElement=>{
 				})
 				if(character.src.indexOf(runSrc) == -1) {
 					character.src = runSrc;
+					characterElement.setAttribute('state','run')
 					characterShadow.src = runSrc
 				}
+				moving()
 			}
 			else if(character.src.indexOf(idleSrc) == -1) {
 				character.src = idleSrc;
+				characterElement.setAttribute('state','idle')
 				characterShadow.src = idleSrc
 			}
 		
@@ -109,6 +112,7 @@ characterElements.forEach(characterElement=>{
 		
 		myCoordX = parseInt(mapBox.style.left)
 		myCoordY = parseInt(mapBox.style.top)
+		myDir = self.dir
 		
 		otherCharacters = document.querySelectorAll("*[me='0']")
 		otherCharacters.forEach(otherCharacter=>{
@@ -130,4 +134,4 @@ characterElements.forEach(characterElement=>{
 		}
 	},50)
 	setTimeout(()=>{if(me) coming()},500)
-})
+}

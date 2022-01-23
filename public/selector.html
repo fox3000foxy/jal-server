@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="./styles/menus.css">
+		<link rel="stylesheet" href="./styles/centrify.css">
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/scripts/openingCircle.js"></script>
+		<script>
+			var socket = io()
+			returnButton = ()=>{
+				closingCircle(()=>{
+					location.href = "/menu.html"
+				})
+			}
+			
+			goOnGame = (type)=>{
+				closingCircle(()=>{
+					location.href = "/index.html?type="+type
+				})
+			}
+		</script>
+		<style>
+			*{
+				--selectable-width: 64px;
+			}
+		
+			.characterSelectable {
+			  /*object-fit: cover; /* Do not scale the image */
+			  /*object-position: top; /* Center the image within the element */
+			  width: var(--selectable-width);
+			  height: var(--selectable-width);
+			  border: 2px solid black;
+			  background-color: #1e1e1e
+			}
+			
+			.characterName {
+			  width: calc(var(--selectable-width) - 10px);
+			  border-left: 2px solid black;
+			  border-right: 2px solid black;
+			  border-bottom: 2px solid black;
+			  background-color: #2e2e2e;
+			  padding: 5px;
+			  display: block;
+			  margin-right:0px;
+			  font-size: calc(var(--selectable-width) / 6)
+			}
+			.characterBox {
+			  align-items: center;
+			}
+			
+			figure.item {
+				vertical-align: top;
+				display: inline-block;
+				text-align: center;
+				/*width: 120px;*/
+			}
+		</style>
+		<meta charset="UTF-8">
+	</head>
+	<body style="clip-path: circle(0% at center center);">
+		<div id="bg">
+		<div class="center">
+			<img src="/fonts/banner.jpg">
+			<div id="selectCharacter"></div>
+			<button onclick="returnButton()">Retour</button>
+		</div>
+	</body>
+	<script>
+		createCharacter = (type)=>{
+			return `
+				<figure class="item" onclick="goOnGame('${type}')">
+					<img src="/characters/${type}/idle.gif" class="characterSelectable">
+					<figcaption class="characterName">${type}</figcaption>
+				</figure>
+			`
+		}
+		selectCharacterMenu = document.getElementById('selectCharacter')
+		types = ['Fox','Human']
+		types.forEach((type)=>{
+			selectCharacterMenu.innerHTML += createCharacter(type)
+		})
+	</script>
+</html>

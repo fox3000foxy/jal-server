@@ -2,6 +2,7 @@ Module = {
 	import: function (name){
 		module = document.createElement('script')
 		module.setAttribute('src',`scripts/${name}.js`)
+		console.log(module)
 		document.head.appendChild(module)
 	},
 	cssImport: function (name){

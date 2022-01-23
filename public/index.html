@@ -2,14 +2,22 @@
 	<head>
 		<link rel="stylesheet" href="styles/isometrify.css">
 		<link rel="stylesheet" href="styles/centrify.css">
+		<link rel="stylesheet" href="styles/menus.css">
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="scripts/Importer.js"></script>
 		<script src="scripts/injector.js"></script>
+		<script src="scripts/openingCircle.js"></script>
 		<script>
 		window.addEventListener('load',()=>{inject()})
 		window.addEventListener('beforeunload',()=>{
-			socket.emit('leaving',myId)
+			socket.emit('leaving',{id:myId})
 		})
+		
+		leave = ()=>{
+			closingCircle(()=>{
+				location.href = "menu.html"
+			})
+		}
 		</script>
 	</head>
 	<body>
@@ -23,5 +31,20 @@
 			<div id="map" style="position:relative"></div>
 		</div>
 		<div id="players"></div>
+		
+		<!-- EscapeMenu -->
+		<div id="overlay" style="visibility:hidden;z-index:98"></div>
+		<div id="escapeMenu" style="visibility:hidden;z-index:99" class="center">
+				<img src="/fonts/banner.jpg">
+				<button class="IndexWidth" onclick="leave()">Quitter</button>			
+		</div>
+		<!-- Scripts -->
+		<script src="scripts/definers.js" draggable="false"></script>
+		<script src="scripts/map.js" draggable="false"></script>
+		<script src="scripts/placer.js" draggable="false"></script>
+		<script src="scripts/characters.js" draggable="false"></script>
+		<script src="scripts/players.js" draggable="false"></script>
+		<script src="scripts/socketManager.js" draggable="false"></script>
+		<script src="scripts/escapeMenu.js" draggable="false"></script>
 	</body>
 </html>
