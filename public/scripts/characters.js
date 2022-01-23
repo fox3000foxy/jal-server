@@ -133,5 +133,5 @@ function CreateCharacter(characterElement){
 			characterElement.setAttribute("coordY",myCoordY)
 		}
 	},50)
-	setTimeout(()=>{if(me) coming()},500)
+	// setTimeout(()=>{if(me) coming()},500)
 }

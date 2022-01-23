@@ -5,6 +5,7 @@ socket.emit('getId', null);
 socket.on('getId', function(msg) {
 	console.log('A new player ask for an ID !')
 	if(!myId) myId = msg.id
+	coming()
 });
 
 function coming(){
@@ -31,10 +32,10 @@ socket.on('newPlayer',(msg)=>{
 })
 
 socket.on('askExistingPlayers',(players)=>{
-	//if(playersAsked) return;
+	// if(playersAsked) return;
 	Object.keys(players).forEach((player)=>{
 		if(players[player].id==myId) return;
-    if(players[player].id==false) return;
+		if(players[player].id==false) return;
 		if(getPlayer(players[player].id)!=null) return;
 		// console.log(players[player])
 		CreateCharacter(createPlayer({
@@ -46,7 +47,7 @@ socket.on('askExistingPlayers',(players)=>{
 			me: 0
 		}))
 	})
-	//playersAsked = true
+	// playersAsked = true
 })
 
 function moving(){
