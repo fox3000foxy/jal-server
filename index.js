@@ -13,7 +13,7 @@ const server = http.createServer(appli);
 const io = new Server(server);
 
 appli.get('/',(req,res)=>{
-	res.sendFile(__dirname+'/public/index.html')
+	res.sendFile(__dirname+'/public/menu.html')
 })
 appli.use(express.static("public"))
 
