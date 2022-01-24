@@ -1,0 +1,12 @@
+.character {
+   width: 32px;
+	padding-top:128px;
+    height: 90px;
+    /* background-color: red; */
+}
+.character > img {
+	position:relative;
+	width: 64px;
+   height: 90px;
+    image-rendering: pixelated;
+}
