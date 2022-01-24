@@ -1,12 +1,12 @@
 .character {
-    width: 64px;
-	padding-top:128px;
-    height: 64px;
+   width: 40px;
+	/*padding-top:128px;*/
+    height: 59px;
     /* background-color: red; */
 }
 .character > img {
 	position:relative;
-	width: 64px;
-    height: 64px;
+	width: 40px;
+   height: 59px;
     image-rendering: pixelated;
 }
