@@ -14,7 +14,7 @@ const server = http.createServer(appli);
 const io = new Server(server);
 
 appli.get('/',(req,res)=>{
-	res.sendFile(__dirname+'/public/menu.html')
+	res.sendFile(__dirname+'/public/logos.html')
 })
 appli.use(express.static("public"))
 
@@ -28,7 +28,18 @@ io.on('connection', (socket) => {
   })
 
   socket.on('heartbeat',(msg)=>{
-    io.emit('heartbeat',Object.keys(actualPlayers))
+    io.emit('heartbeat',{
+      emitter: msg.id,
+      receiver: msg.receiver
+    })
+  })
+
+  socket.on('imHere',(msg)=>{
+    //console.log("im here from",msg.emitter)
+    io.emit('imHere',{
+      emitter: msg.emitter,
+      receiver: msg.receiver
+    })
   })
   
   socket.on('coming',(msg)=>{

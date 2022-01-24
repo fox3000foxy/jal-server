@@ -10,12 +10,15 @@ function createPlayer(p){
 	playerElement.setAttribute("id","player"+p.id)
 	// console.log(p.dir)
 	playerElement.setAttribute("style","transform: scaleX("+p.dir+");")
+  playerElement.setAttribute("defaultDir",p.dir)
+  //playerElement.setAttribute("style","transform: skew("+(-p.dir*45)+"deg,0deg);")
 	return playerElement
 }
 
 getPlayer = (id)=>{return document.getElementById("player"+id)}
 
-var type = location.href.split("type=")[1]
+var type = qs.type
+console.log("Youre playing:",type)
 CreateCharacter(createPlayer({
 	type,
 	id: "me",

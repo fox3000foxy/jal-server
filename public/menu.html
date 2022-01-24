@@ -6,10 +6,16 @@
 		<script src="/scripts/openingCircle.js"></script>
 		<script>
 			var socket = io()
-			quitButton = ()=>{socket.emit('quit',null)}
+			quitButton = ()=>{socket.emit('quit',null)
+      alert('Pour le moment, ce bouton ne sert à rien, mais il aura une utilité, ne vous inquiétez pas (・ω・)')}
 			playButton = ()=>{
 				closingCircle(()=>{
 					location.href = "/selector.html"
+				})
+			}
+      creditButton = ()=>{
+				closingCircle(()=>{
+					location.href = "/logos.html?0"
 				})
 			}
 		</script>
@@ -23,6 +29,7 @@
 		<div class="center">
 			<img src="/fonts/banner.jpg">
 			<button onclick="playButton()">Jouer</button><br><br>
+      <button onclick="creditButton()">Crédits</button><br><br>
 			<button onclick="quitButton()">Quitter</button>
 		</div>
 	</body>

@@ -10,6 +10,7 @@ function CreateCharacter(characterElement){
 		dir: 1
 	}
 	var characterType = characterElement.getAttribute("player")
+	var defDir = parseInt(characterElement.getAttribute("defaultDir"))
 	var character = document.createElement("img")
 	var characterShadow = document.createElement("img")
 	var idleSrc = "characters/"+characterType+"/idle.gif"
@@ -20,14 +21,12 @@ function CreateCharacter(characterElement){
 	character.style.top = "0px"
 	character.style.zIndex = "1"
 	characterShadow.src = character.src
-	characterShadow.style.left = "8px"
-	characterShadow.style.top = "-16px"
-	characterShadow.style.width = "64px"
-	characterShadow.style.height = "16px"
-	characterShadow.style.opacity = "0.30"
-	characterShadow.style.zIndex = "0"
-	characterShadow.style.transform = "scale(1) skew(-45deg)"
+  characterShadow.setAttribute('class','characterShadow')
 	characterShadow.style.filter = "brightness(0)"
+  characterShadow.style.width = "40px"
+  characterShadow.style.height = "30px"
+  characterShadow.style.transform = `skew(${-defDir * 45}deg, 0deg)`
+  characterShadow.style.left= (defDir * 15)+"px"
 	characterElement.appendChild(character)
 	if(characterElement.hasAttribute('autoShadow'))
 	characterElement.appendChild(characterShadow)
@@ -66,7 +65,7 @@ function CreateCharacter(characterElement){
 	setInterval(()=>{
 		if(me) {
 			character.style.transform = `scaleX(${self.dir})`;
-			if(me) characterShadow.style.transform = `scale(${self.dir},1) skew(${self.dir * -45}deg, 0deg)`
+			characterShadow.style.transform = `scale(${self.dir},1) skew(${self.dir * -45}deg, 0deg)`
 			if(pressed.left) 	{mapBox.style.left = (parseInt(mapBox.style.left)+(self.speed*pressed.run))+"px"}
 			if(pressed.right) 	{mapBox.style.left = (parseInt(mapBox.style.left)-(self.speed*pressed.run))+"px"}
 			if(pressed.up) 		{mapBox.style.top = (parseInt(mapBox.style.top)+(self.speed*pressed.run))+"px"}

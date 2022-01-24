@@ -51,8 +51,8 @@
 				vertical-align: top;
 				display: inline-block;
 				text-align: center;
-        margin-right:0px;
-        margin-left:0px;
+        margin-right:2px;
+        margin-left:2px;
 				/*width: 120px;*/
 			}
 		</style>
@@ -67,18 +67,39 @@
 		</div>
 	</body>
 	<script>
-		createCharacter = (type)=>{
-			return `
-				<figure class="item" onclick="goOnGame('${type}')">
-					<img src="/characters/${type}/idle.gif" class="characterSelectable">
-					<figcaption class="characterName">${type}</figcaption>
-				</figure>
-			`
-		}
-		selectCharacterMenu = document.getElementById('selectCharacter')
-		types = ['Fox','Human','Chat','Chèvre','Chien','Cochon','Lapin','Poule','Singe','Souris','Vache']
-		types.forEach((type)=>{
-			selectCharacterMenu.innerHTML += createCharacter(type)
-		})
+      createCharacter = (type)=>{
+        var figure = document.createElement('figure')
+        figure.classList = ["item"]
+        figure.onclick = ()=>{
+          goOnGame(type)
+        }
+
+        var img = document.createElement("img")
+        img.src = "/characters/"+type+"/idle.gif"
+        img.classList = ["characterSelectable"]
+
+        var caption = document.createElement("figcaption")
+        caption.classList = ["characterName"]
+        caption.innerText = type
+
+        window.addEventListener('keydown',(ev)=>{
+          //console.log(ev.key)
+          if(ev.key=="Control" && img.src.indexOf("run")==-1) img.src = "/characters/"+type+"/run.gif"
+        })
+
+        window.addEventListener('keyup',(ev)=>{
+          //console.log(ev.key)
+          if(ev.key=="Control" && img.src.indexOf("idle")==-1) img.src = "/characters/"+type+"/idle.gif"
+        })
+
+        figure.appendChild(img)
+        figure.appendChild(caption)
+        return figure
+      }
+      selectCharacterMenu = document.getElementById('selectCharacter')
+      types = ['Renard','Humain','Chat','Chevre','Chien','Cochon','Lapin','Poule','Singe','Souris','Vache']
+      types.forEach((type)=>{
+        selectCharacterMenu.appendChild(createCharacter(type))
+      })
 	</script>
 </html>

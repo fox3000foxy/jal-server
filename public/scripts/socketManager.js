@@ -1,5 +1,6 @@
 var socket = io();
 myId = false
+kickTimeout = new Array()
 playersAsked = false
 socket.emit('getId', null);
 socket.on('getId', function(msg) {
@@ -7,6 +8,16 @@ socket.on('getId', function(msg) {
 	if(!myId) myId = msg.id
 	coming()
 });
+
+function dummy() {
+  	socket.emit('coming', {
+		x: myCoordX,
+		y: myCoordY,
+		dir: 1,
+		id: 99,
+		type: 'Humain',
+	});
+}
 
 function coming(){
 	socket.emit('coming', {
@@ -66,10 +77,26 @@ socket.on('movement',(msg)=>{
 	// console.log(msg)
 	if(msg.id==myId) return;
 	var player = getPlayer(msg.id)
-	if(player==null) return
+	if(player==null) {
+    var newChar = CreateCharacter(createPlayer({
+			type:msg.type,
+			x: msg.x,
+			y: msg.y,
+			dir: msg.d,
+			id: msg.id,
+			me: 0
+		}))
+    if(newChar) {
+      playersList.appendChild()
+    	var player = getPlayer(msg.id)
+    }
+  }
 	player.style.transform = `scaleX(${msg.dir})`;
 	player.setAttribute('coordX',msg.x+"px")
 	player.setAttribute('coordY',msg.y+"px")
+  shadow = player.querySelector(".characterShadow")
+  shadow.style.transform = `skew(${-msg.dir * 45}deg, 0deg)`
+  shadow.style.left= (msg.dir * 15)+"px"
 	oldCoords = (previousCoords[msg.id] || {x:0,y:0})
 
 	previousCoords[msg.id] = {
@@ -79,18 +106,51 @@ socket.on('movement',(msg)=>{
 	// player.style.top = myCoordY - msg.y
 })
 
+function listPlayer() {
+  var remainingIds = new Array()
+  document.querySelectorAll("[id*=player]:not(#players):not(#playerme)").forEach((elem)=>{
+    remainingIds.push(elem.id.split("player")[1])
+  })
+  return remainingIds
+  console.log(remainingIds)
+}
+
 setInterval(()=>{
 	socket.emit('setState',{
 		state: (getPlayer("me").getAttribute('state') || "idle"),
 		id: myId
 	})
 
-  socket.emit('heartbeat',null)
-},50)
+  heartbeat()
+},500)
 
-socket.on('heartbeat',(remainingPlayers)=>{
+function heartbeat(){
+  listPlayer().forEach(playerId=>{
+    socket.emit('heartbeat',{id:myId,receiver:playerId})
+    kickTimeout[parseInt(playerId)] = setTimeout(()=>{
+      console.log("Clearing:",playerId)
+      if(getPlayer(playerId)!=null){
+        getPlayer(playerId).remove()
+        socket.emit('leaving',{id:playerId})
+      }
+    },30000)
+  })
+}
+
+socket.on('imHere',(msg)=>{
+  clearTimeout(kickTimeout[parseInt(msg.emitter)])
+  //console.log("Je suis ici ! (",msg.emitter,")")
+})
+
+
+socket.on('heartbeat',(msg)=>{
+  //console.log("Demande de heartbeat")
+  socket.emit('imHere',{
+    emitter: myId,
+    receiver: msg.emitter
+  })
   //console.log('remainingPlayers:',remainingPlayers)
-  document.querySelectorAll("[id*='player']").forEach(player=>{
+  /*document.querySelectorAll("[id*='player']").forEach(player=>{
     let playerId = player.getAttribute('id').split("player")[1]
     if(remainingPlayers.indexOf(playerId)==-1) {
       if(playerId!='me' && playerId!='s'){
@@ -98,7 +158,7 @@ socket.on('heartbeat',(remainingPlayers)=>{
         player.remove()
       }
     }
-  })
+  })*/
 })
 
 socket.on('timeOut',(msg)=>{

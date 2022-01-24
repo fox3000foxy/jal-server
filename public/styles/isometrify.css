@@ -28,3 +28,7 @@ body {
 *[tile] {
 	position:absolute;
 }
+
+*{
+    zoom: 1.125;
+}
