@@ -27,9 +27,9 @@
 			  /*object-fit: cover; /* Do not scale the image */
 			  /*object-position: top; /* Center the image within the element */
 			  width: var(--selectable-width);
-			  height: var(--selectable-width);
+			  height: calc(var(--selectable-width) * 1.2);
 			  border: 2px solid black;
-			  background-color: #1e1e1e
+			  background-color: #1e1e1e;
 			}
 			
 			.characterName {
@@ -41,7 +41,7 @@
 			  padding: 5px;
 			  display: block;
 			  margin-right:0px;
-			  font-size: calc(var(--selectable-width) / 6)
+			  font-size: calc(var(--selectable-width) / 8)
 			}
 			.characterBox {
 			  align-items: center;
@@ -51,6 +51,8 @@
 				vertical-align: top;
 				display: inline-block;
 				text-align: center;
+        margin-right:0px;
+        margin-left:0px;
 				/*width: 120px;*/
 			}
 		</style>
@@ -74,7 +76,7 @@
 			`
 		}
 		selectCharacterMenu = document.getElementById('selectCharacter')
-		types = ['Fox','Human']
+		types = ['Fox','Human','Chat','Chèvre','Chien','Cochon','Lapin','Poule','Singe','Souris','Vache']
 		types.forEach((type)=>{
 			selectCharacterMenu.innerHTML += createCharacter(type)
 		})
