@@ -8,9 +8,12 @@
 		<script src="scripts/injector.js"></script>
 		<script src="scripts/openingCircle.js"></script>
 		<script src="scripts/badEaster.js"></script>
+		<script src="scripts/jquery.min.js"></script>
+
 		<script>
 		window.addEventListener('load',()=>{inject()})
 		window.addEventListener('beforeunload',()=>{
+        document.body.style.transform = `scale(${1})`;
 			socket.emit('leaving',{id:myId})
 		})
 		
@@ -42,6 +45,7 @@
 		<!-- Scripts -->
 		<script src="scripts/definers.js" draggable="false"></script>
 		<script src="scripts/map.js" draggable="false"></script>
+		<script src="scripts/collisions.js" draggable="false"></script>
 		<script src="scripts/placer.js" draggable="false"></script>
 		<script src="scripts/characters.js" draggable="false"></script>
 		<script src="scripts/players.js" draggable="false"></script>

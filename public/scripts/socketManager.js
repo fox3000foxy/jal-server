@@ -58,6 +58,7 @@ socket.on('askExistingPlayers',(players)=>{
 			me: 0
 		}))
 	})
+  defineSokcketOfMove()
 	// playersAsked = true
 })
 
@@ -73,38 +74,40 @@ function moving(){
 
 previousCoords = {}
 
-socket.on('movement',(msg)=>{
-	// console.log(msg)
-	if(msg.id==myId) return;
-	var player = getPlayer(msg.id)
-	if(player==null) {
-    var newChar = CreateCharacter(createPlayer({
-			type:msg.type,
-			x: msg.x,
-			y: msg.y,
-			dir: msg.d,
-			id: msg.id,
-			me: 0
-		}))
-    if(newChar) {
-      playersList.appendChild()
-    	var player = getPlayer(msg.id)
+function defineSokcketOfMove(){
+  socket.on('movement',(msg)=>{
+    // console.log(msg)
+    if(msg.id==myId) return;
+    var player = getPlayer(msg.id)
+    if(player==null) {
+      var newChar = CreateCharacter(createPlayer({
+        type:msg.type,
+        x: msg.x,
+        y: msg.y,
+        dir: msg.d,
+        id: msg.id,
+        me: 0
+      }))
+      if(newChar) {
+        playersList.appendChild()
+        var player = getPlayer(msg.id)
+      }
     }
-  }
-	player.style.transform = `scaleX(${msg.dir})`;
-	player.setAttribute('coordX',msg.x+"px")
-	player.setAttribute('coordY',msg.y+"px")
-  shadow = player.querySelector(".characterShadow")
-  shadow.style.transform = `skew(${-msg.dir * 45}deg, 0deg)`
-  shadow.style.left= (msg.dir * 15)+"px"
-	oldCoords = (previousCoords[msg.id] || {x:0,y:0})
+    player.style.transform = `scaleX(${msg.dir})`;
+    player.setAttribute('coordX',msg.x+"px")
+    player.setAttribute('coordY',msg.y+"px")
+    shadow = player.querySelector(".characterShadow")
+    shadow.style.transform = `skew(${-msg.dir * 45}deg, 0deg)`
+    shadow.style.left= (msg.dir * 15)+"px"
+    oldCoords = (previousCoords[msg.id] || {x:0,y:0})
 
-	previousCoords[msg.id] = {
-		x:msg.x,
-		y:msg.y
-	}
-	// player.style.top = myCoordY - msg.y
-})
+    previousCoords[msg.id] = {
+      x:msg.x,
+      y:msg.y
+    }
+  })
+}
+
 
 function listPlayer() {
   var remainingIds = new Array()
@@ -176,7 +179,7 @@ socket.on('setState',(msg)=>{
 	// var runSrc = "characters/"+characterType+"/run.gif"
 	childs = [...player.children]
 	childs.forEach((child)=>{
-		if(child.src.indexOf(newSrc)==-1) child.src = newSrc
+		if(child.src && child.src.indexOf(newSrc)==-1) child.src = newSrc
 	})
 })
 

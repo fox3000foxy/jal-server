@@ -47,3 +47,16 @@ function QueryStringToJSON() {
 }
 
 var qs = QueryStringToJSON();
+
+
+
+function zoom(event) {
+  event.preventDefault();
+  scale += event.deltaY/100 * -0.125;
+  if(scale < 1.125) {scale = 1.125}
+  else if(scale > 1.75) {scale = 1.75}
+  document.body.style.transform = `scale(${scale})`;
+}
+
+let scale = 1.125;
+document.body.onwheel = zoom;

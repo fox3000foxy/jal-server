@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
   })
   
   socket.on('coming',(msg)=>{
-	  console.log("Incoming informations:",msg)
+	  ////console.log("Incoming informations:",msg)
 	  actualPlayers[msg.id] = msg
 	  io.emit('newPlayer',msg)
   })
@@ -55,7 +55,8 @@ io.on('connection', (socket) => {
   socket.on('movement',(msg)=>{
 	  // console.log("Movement:",msg)
 	  actualPlayers[msg.id] = msg
-    timeOut[msg.id] = 3
+    //timeOut[msg.id] = 3
+    //console.log("Move:",msg)
 	  io.emit('movement',msg)
   })
 

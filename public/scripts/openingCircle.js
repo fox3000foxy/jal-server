@@ -4,13 +4,19 @@ window.addEventListener('load',()=>{
 	fadeOut = setInterval(()=>{
 		document.body.style = `clip-path: circle(${fadeOutPercent}% at center center);`
 		fadeOutPercent++
-		if(fadeOutPercent==101) clearInterval(fadeOut)
+		if(fadeOutPercent==101) {
+      clearInterval(fadeOut)
+      if (scale)   document.body.style.transform = `scale(${scale})`;
+    }
 	})
 })
 
 setInterval(()=>{
 	document.querySelectorAll("*:not([draggable])").forEach((elem)=>{
 		elem.setAttribute('draggable', false);
+    elem.addEventListener('contextmenu', ()=>{
+      event.preventDefault()
+    });
 	})
 },50)
 
