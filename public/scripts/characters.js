@@ -110,7 +110,9 @@ function CreateCharacter(characterElement){
 			if(pressed.up) 		{mapBox.style.top = (parseInt(mapBox.style.top)+(self.speed*pressed.run))+"px"}
 			if(pressed.down) 	{mapBox.style.top = (parseInt(mapBox.style.top)-(self.speed*pressed.run))+"px"}
 			collisionables.forEach((tileName)=>{
+        
 				document.querySelectorAll("[src*="+tileName+"]").forEach((voidTile,i)=>{
+          //if(i!=0) return
 					let myPlayer = getPlayer('me').querySelector(".collisionBox")
 					if(overlaps(voidTile,myPlayer).collide) {mapBox.style.top = oldTop+"px"}
 				})
