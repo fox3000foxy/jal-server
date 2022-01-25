@@ -1,6 +1,10 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="./styles/centrify.css">
+    		<link rel="stylesheet" href="./styles/menus.css">
+		<link rel="stylesheet" href="./styles/centrify.css">
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/scripts/openingCircle.js"></script>
 		<meta charset="UTF-8">
 		<style>
 			@font-face {
@@ -9,7 +13,6 @@
 			}
 			
 			body {
-				cursor:none;
 				font-family:"8bit";
 				background-image: url("./fonts/sky.gif");
         background-position: 0 0;
@@ -22,7 +25,9 @@
 	<body>
 		<div class="center">
 			<p id="logo" style="opacity:0;"></p>
+          <button onclick="location.href = 'logos.html'">Jouer</button><br><br>
 		</div>
+
 		<script>
 			redirect = "menu.html"
 			if (location.href.indexOf("#")==-1) location.href = "#0"
@@ -40,7 +45,7 @@
 			}
 			
 			logos = [
-				generateCredit('Cliquez ici pour commencer à jouer','Vixen Studios'),
+				generateCredit('Cliquez ici pour commencer à jouer',''),
 			]
 
       window.addEventListener('keydown',(ev)=>{
@@ -62,7 +67,7 @@
 			i=0;
 			setInterval(()=>{
         logo.innerHTML = logos[nb]
-				if(i<=100) {logo.style.opacity = 2+'%'}
+				if(i<=100) {logo.style.opacity = i+'%'}
 				if(i>=300 && i<=400){logo.style.opacity = (400 - i)+'%'}
 				if(i==500) {
 					if(nb!=logos.length-2) {
@@ -72,7 +77,7 @@
 					else location.href= redirect
 				}
 				i++
-			},10)
+			},1)
     
 
 		</script>

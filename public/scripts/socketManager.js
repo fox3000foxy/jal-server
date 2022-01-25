@@ -58,7 +58,7 @@ socket.on('askExistingPlayers',(players)=>{
 			me: 0
 		}))
 	})
-  defineSokcketOfMove()
+  setTimeout(defineSokcketOfMove,2500)
 	// playersAsked = true
 })
 
@@ -99,6 +99,8 @@ function defineSokcketOfMove(){
     shadow = player.querySelector(".characterShadow")
     shadow.style.transform = `skew(${-msg.dir * 45}deg, 0deg)`
     shadow.style.left= (msg.dir * 15)+"px"
+    nameTag = player.querySelector(".nameTag")
+    nameTag.style.transform = `scaleX(${msg.dir})`;
     oldCoords = (previousCoords[msg.id] || {x:0,y:0})
 
     previousCoords[msg.id] = {

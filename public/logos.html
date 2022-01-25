@@ -1,5 +1,10 @@
 <html>
 	<head>
+    		<link rel="stylesheet" href="./styles/centrify.css">
+    		<link rel="stylesheet" href="./styles/menus.css">
+		<link rel="stylesheet" href="./styles/centrify.css">
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/scripts/openingCircle.js"></script>
 		<link rel="stylesheet" href="./styles/centrify.css">
 		<meta charset="UTF-8">
 		<style>
@@ -9,7 +14,7 @@
 			}
 			
 			body {
-				cursor:none;
+
 				font-family:"8bit";
 				background-image: url("./fonts/sky.gif");
         background-position: 0 0;
@@ -19,7 +24,7 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body style="cursor:none;">
 		<div class="center">
 			<p id="logo" style="opacity:0;"></p>
 		</div>
@@ -54,7 +59,7 @@
 				generateCredit('Et en collaboration avec:','Le Monde de Roxas'),
 				generateCredit('','UN JEU UNIQUE'),
         generateCredit('','<img src="/fonts/banner.jpg">'),
-        generateCredit('','')
+        generateCredit('',' <a href="menu.html"><button onclick="">Jouer</button></a><br><br>')
 			]
 
       window.addEventListener('keydown',(ev)=>{
@@ -83,7 +88,16 @@
             location.href = "#"+(nb+1)
             i=0
           } 
-					else location.href= redirect
+          if (location.href.indexOf("#5")!=-1) 
+          { clearInterval()
+            logo.style.opacity = "101%"
+            document.body.style.cursor='pointer'
+            }
+					else 
+          {
+             location.href= redirect
+          }
+         
           nb+=1
 				}
 				i++

@@ -13,7 +13,7 @@
 		<script>
 		window.addEventListener('load',()=>{inject()})
 		window.addEventListener('beforeunload',()=>{
-        document.body.style.transform = `scale(${1})`;
+      //document.body.style.transform = `scale(${1})`;
 			socket.emit('leaving',{id:myId})
 		})
 		

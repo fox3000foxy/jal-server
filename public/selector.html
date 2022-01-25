@@ -14,7 +14,8 @@
 			
 			goOnGame = (type)=>{
 				closingCircle(()=>{
-					location.href = "/index.html?type="+type
+          name = document.getElementById('name').value
+          if(name!='') location.href = "/index.html?type="+type+"&name="+name
 				})
 			}
 		</script>
@@ -62,6 +63,7 @@
 		<div id="bg">
 		<div class="center">
 			<img src="/fonts/banner.jpg">
+      Name: <input id="name">
 			<div id="selectCharacter"></div>
 			<button onclick="returnButton()">Retour</button>
 		</div>

@@ -14,7 +14,7 @@ const server = http.createServer(appli);
 const io = new Server(server);
 
 appli.get('/',(req,res)=>{
-	res.sendFile(__dirname+'/public/logos.html')
+	res.sendFile(__dirname+'/public/start.html')
 })
 appli.use(express.static("public"))
 
@@ -107,7 +107,7 @@ if(app) {
 		}
 	  })
 
-	  win.loadURL('http://localhost:'+PORT+'/logos.html')
+	  win.loadURL('http://localhost:'+PORT+'/start.html')
 	  win.setMenu(null)
 	  win.setFullScreen(true);
 	}
