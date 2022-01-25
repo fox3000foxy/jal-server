@@ -6,7 +6,7 @@ window.addEventListener('load',()=>{
 		fadeOutPercent++
 		if(fadeOutPercent==101) {
       clearInterval(fadeOut)
-      if (scale)   document.body.style.transform = `scale(${scale})`;
+      //if (scale)   document.body.style.transform = `scale(${scale})`;
     }
 	})
 })

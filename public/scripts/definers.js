@@ -49,7 +49,7 @@ function QueryStringToJSON() {
 var qs = QueryStringToJSON();
 
 
-
+/*
 function zoom(event) {
   event.preventDefault();
   scale += event.deltaY/100 * -0.125;
@@ -59,4 +59,4 @@ function zoom(event) {
 }
 
 let scale = 1.125;
-document.body.onwheel = zoom;
+document.body.onwheel = zoom;*/
