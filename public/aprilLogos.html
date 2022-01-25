@@ -1,6 +1,11 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="./styles/centrify.css">
+    		<link rel="stylesheet" href="./styles/centrify.css">
+    		<link rel="stylesheet" href="./styles/menus.css">
+        <script src="./scripts/openingCircle.js"></script>
+
+		<script src="/socket.io/socket.io.js"></script>
+
 		<meta charset="UTF-8">
 		<style>
 			@font-face {
@@ -9,7 +14,7 @@
 			}
 			
 			body {
-				cursor:none;
+
 				font-family:"8bit";
 				background-image: url("./fonts/sky.gif");
         background-position: 0 0;
@@ -19,13 +24,22 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body style="cursor:none;">
 		<div class="center">
 			<p id="logo" style="opacity:0;"></p>
 		</div>
 		<script>
 			redirect = "menu.html"
 			if (location.href.indexOf("#")==-1) location.href = "#0"
+     	if (location.href.indexOf("#")!=-1)
+      {
+        ldd = document.createElement('audio')
+        ldd.setAttribute('autoplay','')
+        ldd.setAttribute('loop','')
+        ldd.src = '/musics/ldd.mp3'
+        document.body.appendChild(ldd)
+      }
+
 			logo = document.getElementById("logo");
 			nb = parseInt(location.href.split("#")[1])
 
@@ -44,7 +58,10 @@
 				generateCredit('En collaboration avec:','Gokiing Studios'),
 				generateCredit('Et en collaboration avec:','Le Monde de Roxas'),
 				generateCredit('','UN JEU UNIQUE'),
-        generateCredit('','<img src="/fonts/banner.jpg">')
+        generateCredit('','<img src="/fonts/banner.jpg">'),
+        `<button onclick="closingCircle(()=>{
+          location.href= 'menu.html'
+        })">Jouer</button></a><br><br>`
 			]
 
       window.addEventListener('keydown',(ev)=>{
@@ -64,20 +81,40 @@
 			})
 						
 			i=0;
-			setInterval(()=>{
+			logosInterv = setInterval(()=>{
         logo.innerHTML = logos[nb]
 				if(i<=100) {logo.style.opacity = i+'%'}
-				if(i>=300 && i<=400){logo.style.opacity = (400 - i)+'%'}
+				if(i>=300 && i<=400 && location.href.indexOf("#5")==-1){logo.style.opacity = (400 - i)+'%'}
 				if(i==500) {
 					if(nb!=logos.length-1) {
             location.href = "#"+(nb+1)
             i=0
           } 
-					else location.href= redirect
-          nb+=1
+          if (location.href.indexOf("#5")!=-1) 
+          {  
+          
+            document.body.style.cursor='pointer'
+            }
+					if (location.href.split("#")[1]>5) 
+          {
+             //location.href= redirect
+             //location.href = "#5"
+          }
+         if (nb==6) 
+          {
+             location.href= redirect
+             location.href = "./logos.html#5"
+          }
+          if (nb<5) 
+          {
+            nb+=1
+          }
+          
 				}
-				i++
-			},10)
+				i+=100
+			},1000)
+    
+
 		</script>
 	</body>
 </html>

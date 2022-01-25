@@ -15,9 +15,14 @@
 			goOnGame = (type)=>{
 				closingCircle(()=>{
           name = document.getElementById('name').value
-          if(name!='') location.href = "/index.html?type="+type+"&name="+name
+          if(name!='') {
+            localStorage.setItem('name',name)
+            location.href = "/index.html?type="+type+"&name="+name
+            }
 				})
 			}
+
+
 		</script>
 		<style>
 			*{
@@ -109,5 +114,7 @@
       types.forEach((type)=>{
         selectCharacterMenu.appendChild(createCharacter(type))
       })
+
+      document.getElementById('name').value = localStorage.name
 	</script>
 </html>
