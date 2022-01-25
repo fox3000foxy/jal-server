@@ -56,14 +56,20 @@
         margin-left:2px;
 				/*width: 120px;*/
 			}
+
+      input {
+        border-radius: 5px;
+        padding:5px;
+        background: #0f0f0f
+      }
 		</style>
 		<meta charset="UTF-8">
 	</head>
 	<body style="clip-path: circle(0% at center center);">
 		<div id="bg">
 		<div class="center">
-			<img src="/fonts/banner.jpg">
-      Name: <input id="name">
+			<img src="/fonts/banner.jpg"><br>
+      <input id="name" placeholder="Nom">
 			<div id="selectCharacter"></div>
 			<button onclick="returnButton()">Retour</button>
 		</div>

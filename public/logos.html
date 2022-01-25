@@ -81,19 +81,19 @@
 			i=0;
 			setInterval(()=>{
         logo.innerHTML = logos[nb]
-				if(i<=100) {logo.style.opacity = i+'%'}
-				if(i>=300 && i<=400){logo.style.opacity = (400 - i)+'%'}
-				if(i==500) {
-					if(nb!=logos.length-2) {
+				if(i<=100  || location.href.indexOf("#5")==-1) {logo.style.opacity = i+'%'}
+				if(i>=300 && i<=400 || location.href.indexOf("#5")==-1){logo.style.opacity = (400 - i)+'%'}
+				if(i==500  || location.href.indexOf("#5")==-1) {
+					if(nb!=logos.length-1) {
             location.href = "#"+(nb+1)
             i=0
           } 
           if (location.href.indexOf("#5")!=-1) 
-          { clearInterval()
-            logo.style.opacity = "101%"
+          {  location.href = "#5"
+            i=100
             document.body.style.cursor='pointer'
             }
-					else 
+					if (location.href.indexOf("#6")!=-1) 
           {
              location.href= redirect
           }

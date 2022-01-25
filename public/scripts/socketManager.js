@@ -15,6 +15,7 @@ function dummy() {
 		y: myCoordY,
 		dir: 1,
 		id: 99,
+    name: "Dummy", 
 		type: 'Humain',
 	});
 }
@@ -25,6 +26,7 @@ function coming(){
 		y: myCoordY,
 		dir: myDir,
 		id: myId,
+    name: qs.name, 
 		type,
 	});
 	socket.emit('askExistingPlayers',null)
@@ -38,6 +40,7 @@ socket.on('newPlayer',(msg)=>{
 		y: msg.y,
 		dir: msg.dir,
 		id: msg.id,
+    name: msg.name, 
 		me: 0
 	}))
 })
@@ -55,6 +58,7 @@ socket.on('askExistingPlayers',(players)=>{
 			y: players[player].y,
 			dir: players[player].d,
 			id: players[player].id,
+      name: players[player].name,
 			me: 0
 		}))
 	})
@@ -68,6 +72,7 @@ function moving(){
 		y: myCoordY,
 		dir: myDir,
 		id: myId,
+    name: qs.name,
 		type
 	})
 }
@@ -86,6 +91,7 @@ function defineSokcketOfMove(){
         y: msg.y,
         dir: msg.d,
         id: msg.id,
+        name: msg.name,
         me: 0
       }))
       if(newChar) {

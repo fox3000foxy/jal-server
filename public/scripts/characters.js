@@ -44,7 +44,7 @@ function CreateCharacter(characterElement){
 
   nameTag = document.createElement('div')
   nameTag.setAttribute('class','nameTag')
-  nameTag.innerText = "Dummy"
+  nameTag.innerText = characterElem.getAttribute("nameTag")
   nameTag.style.position = "absolute"
   nameTag.style.width = "60px"
   //nameTag.style.height = "20px"

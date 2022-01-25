@@ -14,7 +14,7 @@ const server = http.createServer(appli);
 const io = new Server(server);
 
 appli.get('/',(req,res)=>{
-	res.sendFile(__dirname+'/public/start.html')
+	res.sendFile(__dirname+'/public/logos.html')
 })
 appli.use(express.static("public"))
 
