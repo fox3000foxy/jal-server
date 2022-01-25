@@ -4,7 +4,7 @@ function CreateCharacter(characterElement){
 	// console.log(characterElement)
 	var me = parseInt(characterElement.getAttribute('me'))
 	var self = {
-		speed: 16,
+		speed: 12,
 		jumping: false,
 		jumpingFinished: true,
 		dir: 1
@@ -13,6 +13,7 @@ function CreateCharacter(characterElement){
 	var defDir = parseInt(characterElement.getAttribute("defaultDir"))
 	var character = document.createElement("img")
 	var characterShadow = document.createElement("img")
+	var collisionBox = document.createElement("div")
 	var idleSrc = "characters/"+characterType+"/idle.gif"
 	var runSrc = "characters/"+characterType+"/run.gif"
 	var pressed = {left: false,up:false,down:false,right:false,run:1}
@@ -20,16 +21,27 @@ function CreateCharacter(characterElement){
 	character.style.left = "0px"
 	character.style.top = "0px"
 	character.style.zIndex = "1"
+	
 	characterShadow.src = character.src
-  characterShadow.setAttribute('class','characterShadow')
+	characterShadow.setAttribute('class','characterShadow')
 	characterShadow.style.filter = "brightness(0)"
-  characterShadow.style.width = "40px"
-  characterShadow.style.height = "30px"
-  characterShadow.style.transform = `skew(${-defDir * 45}deg, 0deg)`
-  characterShadow.style.left= (defDir * 15)+"px"
+    characterShadow.style.width = "40px"
+    characterShadow.style.height = "30px"
+    characterShadow.style.transform = `skew(${-defDir * 45}deg, 0deg)`
+    characterShadow.style.left= (defDir * 15)+"px"
+	
+	collisionBox.setAttribute('class','collisionBox')
+	// collisionBox.style.backgroundColor = 'green'
+	collisionBox.style.position = 'absolute'
+	collisionBox.style.width = '36px'
+	collisionBox.style.height = '1px'
+	collisionBox.style.left = '2px'
+	collisionBox.style.top = '57px'
+	collisionBox.style.zIndex = '3'
+	
 	characterElement.appendChild(character)
-	if(characterElement.hasAttribute('autoShadow'))
-	characterElement.appendChild(characterShadow)
+	characterElement.appendChild(collisionBox)
+	if(characterElement.hasAttribute('autoShadow')) characterElement.appendChild(characterShadow)
 	
 	if(localStorage.coordinates && me){
 		if(JSON.parse(localStorage.coordinates).x) mapBox.style.left = JSON.parse(localStorage.coordinates).x
@@ -50,7 +62,7 @@ function CreateCharacter(characterElement){
 		if(ev.key == "ArrowLeft") {pressed.left = true}
 		if(ev.key == "ArrowUp") {pressed.up = true}
 		if(ev.key == "ArrowDown") {pressed.down = true}
-		if(ev.key == "Shift") {pressed.run = 1.5}
+		if(ev.key == "Shift") {pressed.run = 1.75}
 		if(ev.key == " " && self.jumpingFinished==true) {self.jumping = true}
 	})
 		
@@ -64,12 +76,26 @@ function CreateCharacter(characterElement){
 	
 	setInterval(()=>{
 		if(me) {
+			oldLeft = parseInt(mapBox.style.left)
+			oldTop = parseInt(mapBox.style.top)
 			character.style.transform = `scaleX(${self.dir})`;
 			characterShadow.style.transform = `scale(${self.dir},1) skew(${self.dir * -45}deg, 0deg)`
 			if(pressed.left) 	{mapBox.style.left = (parseInt(mapBox.style.left)+(self.speed*pressed.run))+"px"}
 			if(pressed.right) 	{mapBox.style.left = (parseInt(mapBox.style.left)-(self.speed*pressed.run))+"px"}
+			collisionables.forEach((tileName)=>{
+				document.querySelectorAll("[src*="+tileName+"]").forEach((voidTile,i)=>{
+					let myPlayer = getPlayer('me').querySelector(".collisionBox")
+					if(overlaps(voidTile,myPlayer).collide) {mapBox.style.left = oldLeft+"px"}
+				})
+			})
 			if(pressed.up) 		{mapBox.style.top = (parseInt(mapBox.style.top)+(self.speed*pressed.run))+"px"}
-			if(pressed.down) 	{mapBox.style.top = (parseInt(mapBox.style.top)-(self.speed*pressed.run))+"px"}	
+			if(pressed.down) 	{mapBox.style.top = (parseInt(mapBox.style.top)-(self.speed*pressed.run))+"px"}
+			collisionables.forEach((tileName)=>{
+				document.querySelectorAll("[src*="+tileName+"]").forEach((voidTile,i)=>{
+					let myPlayer = getPlayer('me').querySelector(".collisionBox")
+					if(overlaps(voidTile,myPlayer).collide) {mapBox.style.top = oldTop+"px"}
+				})
+			})
 			if(pressed.up || pressed.down || pressed.left || pressed.right || !self.jumpingFinished) {
 				localStorage.coordinates = JSON.stringify({
 					x: mapBox.style.left,

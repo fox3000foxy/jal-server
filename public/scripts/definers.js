@@ -11,8 +11,14 @@ format = {
 	"grass": "jpg",
 	"stone": "jpg",
 	"sand": "jpg",
-	"water": "gif"
+	"water": "gif",
+	"void": "jpg"
 }
+//Collisionnables
+collisionables = [
+	'void',
+	'water'
+]
 
 //Define the tile size
 Module.defineStyle(`

@@ -1,7 +1,9 @@
 map.forEach((line,i)=>{
 	line.forEach((column,j)=>{
 		tile = map[i][j]
+		// Ratio: 64/45*decal
 		tileLeft = (j * width) + (-i * height)
+		// tileLeft = (j * width)
 		tileTop = i * height
 		
 		tileElement = document.createElement('img')
