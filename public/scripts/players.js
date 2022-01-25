@@ -8,7 +8,7 @@ function createPlayer(p){
 	playerElement.setAttribute("coordX",(p.x || 0))
 	playerElement.setAttribute("coordY",(p.y || 0))
 	playerElement.setAttribute("id","player"+p.id)
-  playerElement.setAttribute("nameTag",qs.name)
+  playerElement.setAttribute("nameTag",p.name)
 	// console.log(p.dir)
 	playerElement.setAttribute("style","transform: scaleX("+p.dir+");")
   playerElement.setAttribute("defaultDir",p.dir)
@@ -24,5 +24,6 @@ CreateCharacter(createPlayer({
 	type,
 	id: "me",
 	dir: 1,
+  name: qs.name,
 	me: 1
 }))
