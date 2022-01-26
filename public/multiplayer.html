@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="./styles/menus.css">
+		<link rel="stylesheet" href="./styles/centrify.css">
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="./scripts/openingCircle.js"></script>
+		<script src="./scripts/translator.js"></script>
+		<script>
+			var socket = io()
+			returnButton = ()=>{
+				closingCircle(()=>{
+					location.href = "/menu.html"
+				})
+			}
+			joinButton = ()=>{
+				serverAddress = document.getElementById('serverAddress').value
+				fetch('http://'+serverAddress+'/isJALserver').then(res=>res.text())
+				.then(res=>{
+					location.href = 'http://'+serverAddress+'/selector.html'
+				}).catch(()=>{
+					fetch('https://'+serverAddress+'/isJALserver').then(res=>res.text())
+					.then(res=>{
+						location.href = 'https://'+serverAddress+'/selector.html'
+					}).catch(()=>{
+						document.getElementById("errorBox").style.display = 'block'
+						//document.getElementById("errorLabel").innerText = 
+					})
+				})
+			}
+		</script>
+		<meta charset="UTF-8">
+	</head>
+	<body style="clip-path: circle(0% at center center);">
+		<div id="errorBox" style="
+			display:none;
+			position:absolute;
+			z-Index:5;
+			border: 3px dashed gray;
+			background: black;
+		" class="center"><br><br>
+			<span id="errorLabel">error.cantConnect</span><br><br><br><br>
+			<button onclick="this.parentElement.style.display='none'">Compris !</button>
+		</div>
+		<div id="bg">
+		<div class="center">
+			<img src="./fonts/banner.jpg">
+			<!-- <button onclick="playButton()">Jouer</button><br><br> -->
+			<!-- <button onclick="creditButton()">Crédits</button><br><br> -->
+			<input id="serverAddress" placeholder="Addresse de serveur" onkeydown="
+					setTimeout(()=>{
+						jButtonElem = document.getElementById('joinButton');
+						if(this.value!='') {
+							jButtonElem.style.color = 'white';
+							jButtonElem.setAttribute('onclick','joinButton()')
+						}
+						else{
+							jButtonElem.style.color = 'gray';
+							jButtonElem.setAttribute('onclick','')
+						}
+						localStorage.setItem('lastServer',this.value)
+					})
+			"><br><br>
+			<button style="color:gray;" onclick id="joinButton">label.joinButton</button><br><br>
+			<button onclick="returnButton()">label.returnButton</button>
+		</div>
+		<script>
+			jButtonElem = document.getElementById('joinButton');
+			if(localStorage.lastServer) {
+				serverAddress = document.getElementById('serverAddress')
+				serverAddress.value = localStorage.lastServer
+				if(serverAddress.value!='') {
+					jButtonElem.style.color = 'white';
+					jButtonElem.setAttribute('onclick','joinButton()')
+				}
+				else{
+					jButtonElem.style.color = 'gray';
+					jButtonElem.setAttribute('onclick','')
+				}
+			}
+		</script>
+	</body>
+</html>

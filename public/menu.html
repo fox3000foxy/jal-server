@@ -4,27 +4,33 @@
 		<link rel="stylesheet" href="./styles/centrify.css">
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="/scripts/openingCircle.js"></script>
+		<script src="./scripts/translator.js"></script>
 		<script>
 			var socket = io()
 			quitButton = ()=>{socket.emit('quit',null)
-      alert('Pour le moment, ce bouton ne sert à rien, mais il aura une utilité, ne vous inquiétez pas (・ω・)')}
+			alert('Pour le moment, ce bouton ne sert à rien, mais il aura une utilité, ne vous inquiétez pas (・ω・)')}
 			playButton = ()=>{
 				closingCircle(()=>{
 					location.href = "/selector.html"
 				})
 			}
-      creditButton = ()=>{
+			creditButton = ()=>{
 				closingCircle(()=>{
 					location.href = "/logos.html"
 				})
 			}
-
-              ldd = document.createElement('audio')
-        ldd.setAttribute('autoplay','')
-        ldd.setAttribute('loop','')
-        ldd.src = '/musics/didadou.mp3'
-        document.body.appendChild(ldd)
+			mpButton = ()=>{
+				closingCircle(()=>{
+					location.href = "/multiplayer.html"
+				})
+			}
 		</script>
+
+        <!-- ldd = document.createElement('audio') -->
+        <!-- ldd.setAttribute('autoplay','') -->
+        <!-- ldd.setAttribute('loop','') -->
+        <!-- ldd.src = '/musics/didadou.mp3' -->
+        <!-- document.body.appendChild(ldd) -->
 		<meta charset="UTF-8">
 		<style>
 			
@@ -34,9 +40,10 @@
 		<div id="bg">
 		<div class="center">
 			<img src="/fonts/banner.jpg">
-			<button onclick="playButton()">Jouer</button><br><br>
-      <button onclick="creditButton()">Crédits</button><br><br>
-			<button onclick="quitButton()">Quitter</button>
+			<button onclick="playButton()">label.playButton</button><br><br>
+			<button onclick="mpButton()">label.mpButton</button><br><br>
+			<button onclick="creditButton()">label.creditButton</button><br><br>
+			<button onclick="quitButton()">label.quitButton</button>
 		</div>
 	</body>
 </html>
