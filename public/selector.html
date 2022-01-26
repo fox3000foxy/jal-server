@@ -22,6 +22,13 @@
 				})
 			}
 
+                    ldd = document.createElement('audio')
+        ldd.setAttribute('autoplay','')
+        ldd.setAttribute('loop','')
+        ldd.src = '/musics/didadou.mp3'
+        document.body.appendChild(ldd)
+		</script>
+
 
 		</script>
 		<style>
@@ -115,6 +122,7 @@
         selectCharacterMenu.appendChild(createCharacter(type))
       })
 
+      if(localStorage.name!=undefined)
       document.getElementById('name').value = localStorage.name
 	</script>
 </html>

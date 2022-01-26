@@ -1,6 +1,11 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="./styles/centrify.css">
+    		<link rel="stylesheet" href="./styles/centrify.css">
+    		<link rel="stylesheet" href="./styles/menus.css">
+        <script src="./scripts/openingCircle.js"></script>
+
+		<script src="/socket.io/socket.io.js"></script>
+
 		<meta charset="UTF-8">
 		<style>
 			@font-face {
@@ -9,24 +14,49 @@
 			}
 			
 			body {
-				cursor:none;
+
 				font-family:"8bit";
-				background-image: url("./fonts/sky.gif");
+				background-color:black;
         background-position: 0 0;
         background-size: 100% 100%;
 				color:white;
 				text-align:center;
 			}
+
+     #bg {  
+      background-image: url("./fonts/sky.gif");
+      background-size: 100% 100%;
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      }
 		</style>
 	</head>
-	<body>
+  <div id="bg"></div>
+	<body style="cursor:none;">
 		<div class="center">
 			<p id="logo" style="opacity:0;"></p>
+      <br><br><br>
+      <button id="playbutton" onclick="closingCircle(()=>{
+          location.href= 'menu.html'
+        })">Jouer</button></a><br><br>
 		</div>
 		<script>
 			redirect = "menu.html"
 			if (location.href.indexOf("#")==-1) location.href = "#0"
+     	if (location.href.indexOf("#")!=-1)
+      {
+        ldd = document.createElement('audio')
+        ldd.setAttribute('autoplay','')
+        ldd.setAttribute('loop','')
+        ldd.src = '/musics/ldd.mp3'
+        document.body.appendChild(ldd)
+      }
+
 			logo = document.getElementById("logo");
+			playbutton = document.getElementById("playbutton");
 			nb = parseInt(location.href.split("#")[1])
 
 			function generateCredit(label,text) {
@@ -44,7 +74,8 @@
 				generateCredit('En collaboration avec:','Gokiing Studios'),
 				generateCredit('Et en collaboration avec:','Le Monde de Roxas'),
 				generateCredit('','UN JEU UNIQUE'),
-        generateCredit('','<img src="/fonts/banner.jpg">')
+        generateCredit('','<img src="/fonts/banner.jpg">'),
+        ``
 			]
 
       window.addEventListener('keydown',(ev)=>{
@@ -64,20 +95,43 @@
 			})
 						
 			i=0;
-			setInterval(()=>{
+			logosInterv = setInterval(()=>{
         logo.innerHTML = logos[nb]
-				if(i<=100) {logo.style.opacity = i+'%'}
-				if(i>=300 && i<=400){logo.style.opacity = (400 - i)+'%'}
+				if(i<=100) {logo.style.opacity = i+'%';playbutton.style.opacity = '0%'}
+				if(i>=300 && i<=400  && location.href.indexOf("#5")==-1){logo.style.opacity = (400 - i)+'%'}
+				if(i<=100  && location.href.indexOf("#5")!=-1) {playbutton.style.opacity = i+'%'}
 				if(i==500) {
 					if(nb!=logos.length-1) {
             location.href = "#"+(nb+1)
             i=0
           } 
-					else location.href= redirect
-          nb+=1
+          if (location.href.indexOf("#5")!=-1) 
+          {  
+            
+            document.body.style.cursor=''
+            
+            playbutton.style.cursor='pointer'
+            }
+					if (location.href.split("#")[1]>5) 
+          {
+             //location.href= redirect
+             //location.href = "#5"
+          }
+         if (nb==6) 
+          {
+             location.href= redirect
+             location.href = "./logos.html#5"
+          }
+          if (nb<5) 
+          {
+            nb+=1
+          }
+          
 				}
-				i++
-			},10)
+				i+=10
+			},100)
+    
+
 		</script>
 	</body>
 </html>

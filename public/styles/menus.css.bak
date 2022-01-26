@@ -15,7 +15,7 @@ body {
 
 button {
 	background: black;
-	border: 2px solid #4f4f4f;
+	border: 2px solid #8f8f8f;
 	border-radius: 5px;
 	width: 45%;
 	/* padding-left: 45px; */

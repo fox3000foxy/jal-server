@@ -16,6 +16,9 @@ const io = new Server(server);
 appli.get('/',(req,res)=>{
 	res.sendFile(__dirname+'/public/logos.html')
 })
+appli.get('/isJALserver',(req,res)=>{
+	res.send(200)
+})
 appli.use(express.static("public"))
 
 io.on('connection', (socket) => {

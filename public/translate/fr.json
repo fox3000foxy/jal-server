@@ -1,0 +1,15 @@
+{
+	"logos.title.createdBy": "Un jeu créé par:",
+	"logos.title.affilate1": "En collaboration avec:",
+	"logos.title.affilate2": "Et en collaboration avec:",
+	"logos.title.boldTitle": "UN JEU UNIQUE",
+	
+	"label.playButton": "Jouer",
+	"label.mpButton": "Multijoueur",
+	"label.creditButton": "Crédits",
+	"label.quitButton": "Quitter",
+	"label.joinButton": "Rejoindre",
+	"label.returnButton": "Retour",
+	
+	"error.cantConnect": "Impossible de se connecter au serveur ! Checkez la validité du nom de domaine et vérifiez que le port soit ouvert !"
+	}
