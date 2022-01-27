@@ -1,0 +1,10 @@
+{
+  "toSpeak": {
+    "name": "Dummy",
+    "type": "Chevre"
+  },
+  "messages": [
+    {"speaker":2,"message":"Am a test !"},
+    {"speaker":1,"message":"Understood !"},
+  ]
+}

@@ -19,3 +19,5 @@ map = [
 	[gr,gr,gr,gr,gr,gr,gr,gr,st,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr],
 	[gr,gr,gr,gr,gr,gr,gr,gr,st,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr,gr],
 ]
+
+DialogUi("debug")

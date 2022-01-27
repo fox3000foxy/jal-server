@@ -27,3 +27,5 @@ CreateCharacter(createPlayer({
   name: qs.name,
 	me: 1
 }))
+
+{"x":"-1950px","y":"-155px","d":-1}
