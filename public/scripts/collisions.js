@@ -38,4 +38,4 @@ collideTileDemo = document.createElement('div')
 collideTileDemo.style.position = 'absolute'
 collideTileDemo.style.zIndex = 100
 collideTileDemo.style.background = 'red'
-document.body.appendChild(collideTileDemo)
+//document.body.appendChild(collideTileDemo)
