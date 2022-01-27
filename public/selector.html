@@ -68,7 +68,7 @@
 	<body style="clip-path: circle(0% at center center);">
 		<div id="bg">
 		<div class="center">
-			<img src="/fonts/banner.jpg"><br>
+			<img src="assets/fonts/banner.jpg"><br>
       <input id="name" placeholder="Nom">
 			<div id="selectCharacter"></div>
 			<button onclick="returnButton()">label.returnButton</button>
@@ -83,7 +83,7 @@
         }
 
         var img = document.createElement("img")
-        img.src = "/characters/"+type+"/idle.gif"
+        img.src = "assets/characters/"+type+"/idle.gif"
         img.classList = ["characterSelectable"]
 
         var caption = document.createElement("figcaption")
@@ -92,12 +92,12 @@
 
         window.addEventListener('keydown',(ev)=>{
           //console.log(ev.key)
-          if(ev.key=="Control" && img.src.indexOf("run")==-1) img.src = "/assets/characters/"+type+"/run.gif"
+          if(ev.key=="Control" && img.src.indexOf("run")==-1) img.src = "assets/characters/"+type+"/run.gif"
         })
 
         window.addEventListener('keyup',(ev)=>{
           //console.log(ev.key)
-          if(ev.key=="Control" && img.src.indexOf("idle")==-1) img.src = "/assets/characters/"+type+"/idle.gif"
+          if(ev.key=="Control" && img.src.indexOf("idle")==-1) img.src = "assets/characters/"+type+"/idle.gif"
         })
 
         figure.appendChild(img)

@@ -1,42 +1,38 @@
 width = 60
-height = width * 3/4
+height = width * 3 / 4
 
 //Tiles minimizer
-gr = 'grass'
-st = 'stone'
-wa = 'water'
-sa = 'sand'
-//Type of tile
-format = {
-	"grass": "jpg",
-	"stone": "jpg",
-	"sand": "jpg",
-	"water": "gif",
-	"void": "jpg"
+if(location.href.indexOf("index.html")!=-1) {
+  structures = [...AllStructures]
+  let AllPlacableBox = AllTiles.concat(AllStructures)
+  AllPlacableBox.forEach((img)=>{
+    eval(img.substr(0,2)+' = "'+img+'"')
+  })
+
+  //Collisionnables
+  collisionables = structures.concat([
+      'void',
+      wa
+  ])
+
+  //Define the tile size
+  Module.defineStyle(`
+    html {
+      --width: ${width+1}px;
+      --height: ${height+1}px
+    }
+  `)
+
+  //Elements
+  mapElement = document.getElementById('map')
+  mapBox = document.getElementById('mapBox')
+  playersList = document.getElementById('players')
 }
-//Collisionnables
-collisionables = [
-	'void',
-	'water'
-]
-
-//Define the tile size
-Module.defineStyle(`
-	html {
-		--width: ${width+1}px;
-		--height: ${height+1}px
-	}
-`)
-
-//Elements
-mapElement = document.getElementById('map')
-mapBox = document.getElementById('mapBox')
-playersList = document.getElementById('players')
 
 //Main functions
-function QueryStringToJSON() {            
+function QueryStringToJSON() {
     var pairs = location.search.slice(1).split('&');
-    
+
     var result = {};
     pairs.forEach(function(pair) {
         pair = pair.split('=');
@@ -48,7 +44,16 @@ function QueryStringToJSON() {
 
 var qs = QueryStringToJSON();
 
+var dialogUi = document.getElementById("dialogUI")
+if(dialogUi) {
+  function DialogUI(dialogId) {
+    dialogUi.src = "dialog.html?dialogId="+dialogId
+  }
+  dialogUi.onload = ()=>{
+    dialogUi.style.display = 'block'
+  }
 
+}
 /*
 function zoom(event) {
   event.preventDefault();

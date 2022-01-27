@@ -1,5 +1,6 @@
 window.addEventListener('load',()=>{
-	document.body.style = `clip-path: circle(0% at center center);`
+  document.body.style = `clip-path: circle(0% at center center);`
+	document.body.style.background = `black`
 	fadeOutPercent = 0
 	fadeOut = setInterval(()=>{
 		document.body.style = `clip-path: circle(${fadeOutPercent}% at center center);`

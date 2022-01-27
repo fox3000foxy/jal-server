@@ -10,6 +10,7 @@ const http = require('http');
 const { app, BrowserWindow } = require('electron')
 const { Server } = require("socket.io");
 var cors = require('cors')
+const fs = require('fs')
 const appli = express()
 const server = http.createServer(appli);
 const io = new Server(server);
@@ -18,6 +19,20 @@ appli.use(cors())
 
 appli.get('/',(req,res)=>{res.sendFile(__dirname+'/public/start.html')})
 appli.get('/isJALserver',(req,res)=>{res.send(200)})
+appli.get('/allTiles.js',(req,res)=>{
+  let dirFiles = fs.readdirSync('./public/assets/tiles')
+  for (i=0;i<dirFiles.length;i++) {
+    dirFiles[i] = dirFiles[i].split(".")[0]
+  }
+  res.send('AllTiles = '+JSON.stringify(dirFiles))
+})
+appli.get('/allStructures.js',(req,res)=>{
+  let dirFiles = fs.readdirSync('./public/assets/structures')
+  for (i=0;i<dirFiles.length;i++) {
+    dirFiles[i] = dirFiles[i].split(".")[0]
+  }
+  res.send('AllStructures = '+JSON.stringify(dirFiles))
+})
 appli.use(express.static("public"))
 
 io.on('connection', (socket) => {
@@ -32,6 +47,10 @@ io.on('connection', (socket) => {
       emitter: msg.id,
       receiver: msg.receiver
     })
+  })
+
+  socket.on('chatMessage',(msg)=>{
+    io.emit('chatMessage',msg)
   })
 
   socket.on('imHere',(msg)=>{
@@ -60,6 +79,7 @@ io.on('connection', (socket) => {
   })
   
   socket.on('leaving',(msg)=>{
+    msg.id = parseInt(msg.id)
 	  console.log("ID",msg.id,"has been removed")
 	  delete actualPlayers[msg.id]
 	  io.emit('leaving',{id:msg.id})

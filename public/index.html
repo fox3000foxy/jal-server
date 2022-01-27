@@ -4,6 +4,8 @@
 		<link rel="stylesheet" href="styles/centrify.css">
 		<link rel="stylesheet" href="styles/menus.css">
 		<script src="/socket.io/socket.io.js"></script>
+		<script src="allTiles.js"></script>
+		<script src="allStructures.js"></script>
 		<script src="scripts/Importer.js"></script>
 		<script src="scripts/injector.js"></script>
 		<script src="scripts/openingCircle.js"></script>
@@ -23,25 +25,113 @@
 			})
 		}
 		</script>
+		<style>
+			#mapBox{
+				left:-340px;
+				top:-152px;
+				width:0px;
+				height:0px
+			}
+			#tchat{
+				position:absolute;
+				left:15px;
+				bottom:15px;
+				z-index: 5
+			}
+			#tchatInput {
+				background: #0f0f0f8f;
+				width:300px;
+				text-align:left;
+				font-size:8px;
+			}
+			#tchatBox{
+				width:300px;
+				height:250px;
+				background: #0f0f0f8f;
+				display: flex;
+				flex-direction: column-reverse;
+				text-align:left;
+			}
+			.tchatMessage {
+				text-align:left;
+				font-size:8px;
+				margin:3px
+			}
+		</style>
 	</head>
 	<body>
 		<div id="sky"></div>
-		<div id="mapBox" class="mapBox center" style="
-			left:-340px;
-			top:-152px;
-			width:0px;
-			height:0px
-		">
+		<div id="mapBox" class="mapBox center" style="">
 			<div id="map" style="position:relative"></div>
 		</div>
 		<div id="players"></div>
-		
 		<!-- EscapeMenu -->
 		<div id="overlay" style="visibility:hidden;z-index:98"></div>
 		<div id="escapeMenu" style="visibility:hidden;z-index:99" class="center">
-				<img src="/fonts/banner.jpg">
+				<img src="assets/fonts/banner.jpg">
 				<button class="IndexWidth" onclick="leave()">label.quitButton</button>			
 		</div>
+		<div id="tchat" style="opacity:0">
+			<div id="tchatBox"></div>
+			<br>
+			<input id="tchatInput">
+		</div>
+    <iframe id="dialogUI" style="display:none;z-index:50"></iframe>
+		<script>
+			tchatFocused = false
+			tchat = document.getElementById("tchat")
+			tchatInput = document.getElementById("tchatInput")
+			tchatBox = document.getElementById("tchatBox")
+			tchatSocket = io()
+			tchatInput.addEventListener('keydown',(ev)=>{
+				setTimeout(()=>{
+					if(ev.key=="Enter") {
+						tchatSocket.emit('chatMessage',{
+							name: qs.name,
+							message: tchatInput.value
+						})
+						tchatInput.value = ''
+						tchatInput.blur()
+						tchatFocused = false
+					}
+				})
+			})
+			
+			document.addEventListener('keydown',(ev)=>{
+				if(ev.key=="t") {
+					if(!tchatFocused) event.preventDefault()
+					tchatInput.focus()
+					tchatFocused = true
+				}
+			})
+			
+			tchatInput.onblur = ()=>{
+				tchatFocused = false
+			}			
+			tchatInput.onfocus = ()=>{
+				tchatFocused = true
+			}
+			
+			m = 0
+			setInterval(()=>{
+        if(tchatFocused) {
+          m=0
+          tchat.style.opacity = "1"
+        }
+				if(m>200) {
+					if(tchat.style.opacity!="0")
+					tchat.style.opacity = parseFloat(tchat.style.opacity) - 0.01
+				}
+				m++
+			},5)
+			
+			tchatSocket.on('chatMessage',(msg)=>{
+				m = 0
+				tchat.style.opacity = "1"
+				let message = `<span class='tchatMessage'> &lt;${msg.name}&gt; ${msg.message}</span>`
+				tchatBox.innerHTML = message + tchatBox.innerHTML
+			})
+		</script>
 		<!-- Scripts -->
 		<script src="scripts/definers.js" draggable="false"></script>
 		<script src="scripts/map.js" draggable="false"></script>

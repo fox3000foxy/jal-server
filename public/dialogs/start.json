@@ -1,0 +1,13 @@
+{
+  "toSpeak": {
+    "name": "Vixen",
+    "type": "Chevre"
+  },
+  "messages": [
+    {"speaker":1,"message":"Hello !"},
+    {"speaker":1,"message":"Comment tu vas ?"},
+    {"speaker":2,"message":"Bien et toi ?"},
+    {"speaker":1,"message":"Ceci est un dialogue de test"},
+    {"speaker":1,"message":"Je confirme que mon sourire est con."}
+  ]
+}
