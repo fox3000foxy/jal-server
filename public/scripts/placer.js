@@ -7,7 +7,7 @@ map.forEach((line,i)=>{
 		tileTop = i * height
 		
 		tileElement = document.createElement('img')
-		tileElement.src=`tiles/${tile}.${format[tile]}`
+		tileElement.src=`assets/tiles/${tile}.${format[tile]}`
 		tileElement.setAttribute('isometric','')
 		tileElement.setAttribute('tile','')
 		tileElement.style.left = tileLeft+"px"

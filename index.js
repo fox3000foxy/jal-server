@@ -9,21 +9,18 @@ const express = require('express')
 const http = require('http');
 const { app, BrowserWindow } = require('electron')
 const { Server } = require("socket.io");
+var cors = require('cors')
 const appli = express()
 const server = http.createServer(appli);
 const io = new Server(server);
 
-appli.get('/',(req,res)=>{
-	res.sendFile(__dirname+'/public/logos.html')
-})
-appli.get('/isJALserver',(req,res)=>{
-	res.send(200)
-})
+appli.use(cors())
+
+appli.get('/',(req,res)=>{res.sendFile(__dirname+'/public/start.html')})
+appli.get('/isJALserver',(req,res)=>{res.send(200)})
 appli.use(express.static("public"))
 
 io.on('connection', (socket) => {
-  // console.log('A new player come !');
-  
   socket.on('getId',(msg)=>{
 	  id++
 	  console.log("ID",id,"has been gived")
@@ -38,7 +35,6 @@ io.on('connection', (socket) => {
   })
 
   socket.on('imHere',(msg)=>{
-    //console.log("im here from",msg.emitter)
     io.emit('imHere',{
       emitter: msg.emitter,
       receiver: msg.receiver
@@ -46,7 +42,6 @@ io.on('connection', (socket) => {
   })
   
   socket.on('coming',(msg)=>{
-	  ////console.log("Incoming informations:",msg)
 	  actualPlayers[msg.id] = msg
 	  io.emit('newPlayer',msg)
   })
@@ -56,24 +51,11 @@ io.on('connection', (socket) => {
   })
   
   socket.on('movement',(msg)=>{
-	  // console.log("Movement:",msg)
 	  actualPlayers[msg.id] = msg
-    //timeOut[msg.id] = 3
-    //console.log("Move:",msg)
 	  io.emit('movement',msg)
   })
 
-  setInterval(()=>{
-    Object.keys(timeOut).forEach((key)=>{
-      timeOut[key]--
-      //if(timeOut[key]==0)
-      //io.emit('leaving',{id:parseInt(key)})
-      //io.emit('timeOut',{id:parseInt(key)})
-    })
-  },1000)
-
   socket.on('setState',(msg)=>{
-	  // console.log("Movement:",msg)
 	  io.emit('setState',msg)
   })
   
@@ -84,7 +66,6 @@ io.on('connection', (socket) => {
   })
   
   socket.on('disconnect', () => {
-    // console.log('Disconnection !');
   });
   
   socket.on('quit',()=>{

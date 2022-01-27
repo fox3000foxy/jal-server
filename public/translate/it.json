@@ -1,0 +1,13 @@
+{
+  "logos.title.createdBy": "Un gioco creato da:",
+  "logos.title.affilate1": "In collaborazione con:",
+  "logos.title.affilate2": "E in collaborazione con:",
+  "logos.title.boldTitle": "Un singolo gioco",
+  "label.playButton": "Giocatore",
+  "label.mpButton": "Multiplayer",
+  "label.creditButton": "Crediti",
+  "label.quitButton": "Lasciare",
+  "label.joinButton": "Raggiungere",
+  "label.returnButton": "Ritorno",
+  "error.cantConnect": "Impossibile connettersi al server!Controllare la validità del nome del dominio e verificare che la porta sia aperta!"
+}

@@ -1,0 +1,13 @@
+{
+  "logos.title.createdBy": "Ein Spiel erstellt von:",
+  "logos.title.affilate1": "In Zusammenarbeit mit:",
+  "logos.title.affilate2": "Und in Zusammenarbeit mit:",
+  "logos.title.boldTitle": "Ein einzelnes Spiel",
+  "label.playButton": "Spieler",
+  "label.mpButton": "Multiplayer.",
+  "label.creditButton": "Kreditschriften",
+  "label.quitButton": "Verlassen",
+  "label.joinButton": "Zu erneuern",
+  "label.returnButton": "Zurückkehren",
+  "error.cantConnect": "Es ist unmöglich, mit dem Server herzustellen!Überprüfen Sie die Gültigkeit des Domainnamens und überprüfen Sie, ob der Port geöffnet ist!"
+}

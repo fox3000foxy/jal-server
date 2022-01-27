@@ -92,12 +92,12 @@
 
         window.addEventListener('keydown',(ev)=>{
           //console.log(ev.key)
-          if(ev.key=="Control" && img.src.indexOf("run")==-1) img.src = "/characters/"+type+"/run.gif"
+          if(ev.key=="Control" && img.src.indexOf("run")==-1) img.src = "/assets/characters/"+type+"/run.gif"
         })
 
         window.addEventListener('keyup',(ev)=>{
           //console.log(ev.key)
-          if(ev.key=="Control" && img.src.indexOf("idle")==-1) img.src = "/characters/"+type+"/idle.gif"
+          if(ev.key=="Control" && img.src.indexOf("idle")==-1) img.src = "/assets/characters/"+type+"/idle.gif"
         })
 
         figure.appendChild(img)

@@ -1,6 +1,6 @@
 @font-face {
 	 font-family: "8bit";
-	 src: url("../fonts/8bit.ttf")
+	 src: url("../assets/fonts/8bit.ttf")
 }
 body {
 	background: black;
@@ -39,7 +39,7 @@ button:hover {
 }
 
 #bg {
-  background-image: url('../fonts/menu.jpg');
+  background-image: url('../assets/fonts/menu.jpg');
   background-size: 100% 100%;
   position:absolute;
   top:0;

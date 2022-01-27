@@ -1,0 +1,103 @@
+<html>
+	<head>
+    		<link rel="stylesheet" href="./styles/centrify.css">
+    		<link rel="stylesheet" href="./styles/menus.css">
+        <script src="./scripts/openingCircle.js"></script>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<meta charset="UTF-8">
+		<style>
+			@font-face {
+				 font-family: "8bit";
+				 src: url("./assets/fonts/8bit.ttf")
+			}
+	body {
+
+				font-family:"8bit";
+				background-color:black;
+        background-position: 0 0;
+        background-size: 100% 100%;
+				color:white;
+				text-align:center;
+			}
+
+     #bg {  
+      background-image: url("./assets/fonts/sky.gif");
+      background-size: 100% 100%;
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      }
+
+      img{
+        position:absolute;
+        z-index:1;
+      }
+
+      #perso1{
+        left:10% ;
+        bottom:30%;
+        }
+
+        #perso2{
+        right:10% ;
+        bottom:30%;
+        
+        }
+
+      .isnotspeaking1
+      {
+      transform: scale(-2,2);
+      filter: brightness(25%);
+      bottom:25%;
+      }
+
+      .isnotspeaking2
+      {
+      transform: scale(-2,2);
+      filter: brightness(25%);
+      bottom:25%;
+      }
+        
+        
+        .center {
+	background: black;
+	border: 2px solid #4f4f4f;
+	border-radius: 5px;
+	width: 100%;
+  	height: 18%;
+	/* padding-left: 45px; */
+	/* padding-right: 45px; */
+	padding-bottom: 15px;
+padding-top: 15px;
+    position: absolute;
+    text-align: center;
+    bottom: -75%;
+    z-index:2;
+}
+		</style>
+	</head>
+	<body><div id="bg"></div>
+		<div class="center">
+
+ Bonjour
+          
+
+		</div>
+    <img id="perso1" src="./assets/characters/Chat/idle.gif" class="isnotspeaking1"></img>
+<img class="isnotspeaking2" id="perso2" src="./assets/characters/Chat/idle.gif"></img>
+	</body>
+
+  <script>
+    function speaking(num)
+    {
+      perso = document.getElementById(`perso${num}`).style =         `bottom:30%;
+      transform: scale(3,3);
+      filter: brightness(25%);`
+
+    }
+    speaking(1)
+    </script>
+</html>

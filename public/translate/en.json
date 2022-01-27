@@ -1,0 +1,13 @@
+{
+  "logos.title.createdBy": "A game created by:",
+  "logos.title.affilate1": "In collaboration with:",
+  "logos.title.affilate2": "And in collaboration with:",
+  "logos.title.boldTitle": "A single game",
+  "label.playButton": "Player",
+  "label.mpButton": "Multiplayer",
+  "label.creditButton": "Credits",
+  "label.quitButton": "To leave",
+  "label.joinButton": "To rejoin",
+  "label.returnButton": "Return",
+  "error.cantConnect": "Impossible to connect to the server !Check the validity of the domain name and verify that the port is open!"
+}

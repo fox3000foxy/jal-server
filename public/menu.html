@@ -6,6 +6,10 @@
 		<script src="/scripts/openingCircle.js"></script>
 		<script src="./scripts/translator.js"></script>
 		<script>
+      ldd = document.createElement('audio')
+        ldd.setAttribute('autoplay','')
+        ldd.setAttribute('loop','')
+        ldd.src = '/assets/musics/didadou.mp3'
 			var socket = io()
 			quitButton = ()=>{socket.emit('quit',null)
 			alert('Pour le moment, ce bouton ne sert à rien, mais il aura une utilité, ne vous inquiétez pas (・ω・)')}
@@ -26,11 +30,11 @@
 			}
 		</script>
 
-        <!-- ldd = document.createElement('audio') -->
-        <!-- ldd.setAttribute('autoplay','') -->
-        <!-- ldd.setAttribute('loop','') -->
-        <!-- ldd.src = '/musics/didadou.mp3' -->
-        <!-- document.body.appendChild(ldd) -->
+        ldd = document.createElement('audio')
+        ldd.setAttribute('autoplay','')
+        ldd.setAttribute('loop','')
+        ldd.src = '/assets/musics/didadou.mp3'
+        document.body.appendChild(ldd)
 		<meta charset="UTF-8">
 		<style>
 			

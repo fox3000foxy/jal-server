@@ -26,7 +26,7 @@ function konami() {
 	if(!bad) {
 		bad = document.createElement('audio')
 		bad.setAttribute('autoplay','')
-		bad.src = '/musics/badEaster.mp3'
+		bad.src = 'assets/musics/badEaster.mp3'
 		bad.currentTime = 2.65
 		document.body.appendChild(bad)
 	}

@@ -16,11 +16,11 @@ function CreateCharacter(characterElement){
 	var characterShadow = document.createElement("img")
 	var collisionBox = document.createElement("div")
 	
-  var idleSrc = "characters/"+characterType+"/idle.gif"
-	var runSrc = "characters/"+characterType+"/run.gif"
+	var idleSrc = "assets/characters/"+characterType+"/idle.gif"
+	var runSrc = "assets/characters/"+characterType+"/run.gif"
 	var pressed = {left: false,up:false,down:false,right:false,run:1}
 	
-  character.src = idleSrc
+	character.src = idleSrc
 	character.style.left = "0px"
 	character.style.top = "0px"
 	character.style.zIndex = "1"
@@ -28,10 +28,10 @@ function CreateCharacter(characterElement){
 	characterShadow.src = character.src
 	characterShadow.setAttribute('class','characterShadow')
 	characterShadow.style.filter = "brightness(0)"
-  characterShadow.style.width = "40px"
-  characterShadow.style.height = "30px"
-  characterShadow.style.transform = `skew(${-defDir * 45}deg, 0deg)`
-  characterShadow.style.left= (defDir * 15)+"px"
+	characterShadow.style.width = "40px"
+	characterShadow.style.height = "30px"
+	characterShadow.style.transform = `skew(${-defDir * 45}deg, 0deg)`
+	characterShadow.style.left= (defDir * 15)+"px"
 	
 	collisionBox.setAttribute('class','collisionBox')
 	// /* Color the collision box of player*/ collisionBox.style.backgroundColor = 'green'
@@ -42,24 +42,24 @@ function CreateCharacter(characterElement){
 	collisionBox.style.top = '57px'
 	collisionBox.style.zIndex = '3'
 
-  nameTag = document.createElement('div')
-  nameTag.setAttribute('class','nameTag')
-  nameTag.innerText = characterElement.getAttribute("nameTag")
-  nameTag.style.position = "absolute"
-  nameTag.style.width = "60px"
-  //nameTag.style.height = "20px"
-  nameTag.style.padding = "6px"
-  nameTag.style.fontSize = "8px"
-  nameTag.style.color = "white"
-  nameTag.style.textAlign = "center"
-  nameTag.style.background = "#0f0f0f8f"
-  nameTag.style.left = "-8px"
-  nameTag.style.top = "-20px"
-  nameTag.style.transform = `scaleX(${defDir})`;
+	nameTag = document.createElement('div')
+	nameTag.setAttribute('class','nameTag')
+	nameTag.innerText = characterElement.getAttribute("nameTag")
+	nameTag.style.position = "absolute"
+	nameTag.style.width = "60px"
+	//nameTag.style.height = "20px"
+	nameTag.style.padding = "6px"
+	nameTag.style.fontSize = "8px"
+	nameTag.style.color = "white"
+	nameTag.style.textAlign = "center"
+	nameTag.style.background = "#0f0f0f8f"
+	nameTag.style.left = "-8px"
+	nameTag.style.top = "-20px"
+	nameTag.style.transform = `scaleX(${defDir})`;
 	
 	characterElement.appendChild(character)
 	characterElement.appendChild(collisionBox)
-  if(!me) characterElement.appendChild(nameTag)
+	if(!me) characterElement.appendChild(nameTag)
 	if(characterElement.hasAttribute('autoShadow')) characterElement.appendChild(characterShadow)
 	
 	if(localStorage.coordinates && me){

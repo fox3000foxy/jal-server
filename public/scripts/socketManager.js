@@ -183,7 +183,7 @@ socket.on('setState',(msg)=>{
 	var player = getPlayer(msg.id)
 	// console.log(msg)
 	var characterType = player.getAttribute("player")
-	var newSrc = "characters/"+characterType+"/"+msg.state+".gif"
+	var newSrc = "assets/characters/"+characterType+"/"+msg.state+".gif"
 	// var runSrc = "characters/"+characterType+"/run.gif"
 	childs = [...player.children]
 	childs.forEach((child)=>{
