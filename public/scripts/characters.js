@@ -15,6 +15,7 @@ function CreateCharacter(characterElement) {
     var character = document.createElement("img")
     var characterShadow = document.createElement("img")
     var collisionBox = document.createElement("div")
+    var speechBubble = document.createElement("img")
 
     var idleSrc = "assets/characters/" + characterType + "/idle.gif"
     var runSrc = "assets/characters/" + characterType + "/run.gif"
@@ -63,10 +64,20 @@ function CreateCharacter(characterElement) {
     nameTag.style.top = "-20px"
     nameTag.style.transform = `scaleX(${defDir})`;
 
+    speechBubble.src = "/assets/bubbles/dialog.gif"
+    speechBubble.style.position = 'absolute'
+    speechBubble.style.width = '34px'
+    speechBubble.style.height = '34px'
+    speechBubble.style.left = '9px'
+    speechBubble.style.top = '-60px'
+    speechBubble.style.zIndex = '3'
+    speechBubble.style.transform = `scaleX(${defDir})`;
+
     characterElement.appendChild(character)
     characterElement.appendChild(collisionBox)
     if (!me) characterElement.appendChild(nameTag)
     if (characterElement.hasAttribute('autoShadow')) characterElement.appendChild(characterShadow)
+    if (characterElement.hasAttribute('speechBubble')) characterElement.appendChild(speechBubble)
 
     if (localStorage.coordinates && me) {
         if (JSON.parse(localStorage.coordinates).x) mapBox.style.left = JSON.parse(localStorage.coordinates).x

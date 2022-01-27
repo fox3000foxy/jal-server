@@ -28,9 +28,9 @@ appli.get('/allTiles.js',(req,res)=>{
 })
 appli.get('/allStructures.js',(req,res)=>{
   let dirFiles = fs.readdirSync('./public/assets/structures')
-  for (i=0;i<dirFiles.length;i++) {
-    dirFiles[i] = dirFiles[i].split(".")[0]
-  }
+  dirFiles.forEach((file)=>{
+    file = file.split(".")[0]
+  })
   res.send('AllStructures = '+JSON.stringify(dirFiles))
 })
 appli.use(express.static("public"))

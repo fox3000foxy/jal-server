@@ -25,14 +25,24 @@ function createNPC(n){
 	npcElement.setAttribute("me",n.me)
 	npcElement.setAttribute("coordX",(n.x || 0))
 	npcElement.setAttribute("coordY",(n.y || 0))
-	npcElement.setAttribute("id","player"+n.id)
+	npcElement.setAttribute("id","npc"+n.id)
   npcElement.setAttribute("nameTag",n.name)
 	// console.log(p.dir)
 	npcElement.setAttribute("style","transform: scaleX("+n.dir+");")
   npcElement.setAttribute("defaultDir",n.dir)
+  if(n.speechBubble) npcElement.setAttribute('speechBubble','')
+  if(n.dialog) npcElement.addEventListener('mousedown',()=>{
+    if(getDistance(
+        Math.abs(myCoordX),
+        Math.abs(myCoordY),
+        Math.abs(n.x),
+        Math.abs(n.y)
+      ) < 250) DialogUI(n.dialog)
+  }) 
   //playerElement.setAttribute("style","transform: skew("+(-p.dir*45)+"deg,0deg);")
 	return npcElement
 }
+
 
 getPlayer = (id)=>{return document.getElementById("player"+id)}
 
@@ -52,6 +62,8 @@ CreateCharacter(createNPC({
 	dir: -1,
   name: "Larry",
 	me: 0,
-  x:"-1950px",
-  y:"-155px"
-}))//{"x":"-1950px","y":"-155px","d":-1}
+  x:-1950,
+  y:-155,
+  speechBubble: true,
+  dialog: "start"
+}))

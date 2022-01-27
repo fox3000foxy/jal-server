@@ -10,6 +10,7 @@
         ldd.setAttribute('autoplay','')
         ldd.setAttribute('loop','')
         ldd.src = '/assets/musics/didadou.mp3'
+        document.body.appendChild(ldd)
 			var socket = io()
 			quitButton = ()=>{socket.emit('quit',null)
 			alert('Pour le moment, ce bouton ne sert à rien, mais il aura une utilité, ne vous inquiétez pas (・ω・)')}
