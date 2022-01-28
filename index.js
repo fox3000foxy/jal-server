@@ -17,115 +17,131 @@ const io = new Server(server);
 
 appli.use(cors())
 
-appli.get('/',(req,res)=>{res.sendFile(__dirname+'/public/start.html')})
-appli.get('/isJALserver',(req,res)=>{res.send(200)})
-appli.get('/allTiles.js',(req,res)=>{
+appli.get('/', (req, res) => { res.sendFile(__dirname + '/public/start.html') })
+appli.get('/isJALserver', (req, res) => { res.send(200) })
+appli.get('/allCharacters', (req, res) => {
+   res.send(JSON.stringify(fs.readdirSync('./public/assets/characters')))
+})
+appli.get('/allTiles.js', (req, res) => {
   let dirFiles = fs.readdirSync('./public/assets/tiles')
-  for (i=0;i<dirFiles.length;i++) {
+  for (i = 0; i < dirFiles.length; i++) {
     dirFiles[i] = dirFiles[i].split(".")[0]
   }
-  res.send('AllTiles = '+JSON.stringify(dirFiles))
+  res.send('AllTiles = ' + JSON.stringify(dirFiles))
 })
-appli.get('/allStructures.js',(req,res)=>{
+appli.get('/allMaps', (req, res) => {
+  let dirFiles = fs.readdirSync('./public/maps')
+  for (i = 0; i < dirFiles.length; i++) {
+    dirFiles[i] = dirFiles[i].split(".json")[0]
+  }
+  res.send(JSON.stringify(dirFiles))
+})
+appli.get('/allStructures.js', (req, res) => {
   let dirFiles = fs.readdirSync('./public/assets/structures')
-  dirFiles.forEach((file)=>{
-    file = file.split(".")[0]
-  })
-  res.send('AllStructures = '+JSON.stringify(dirFiles))
+  for (i = 0; i < dirFiles.length; i++) {
+    dirFiles[i] = dirFiles[i].split(".")[0]
+  }
+  res.send('AllStructures = ' + JSON.stringify(dirFiles))
 })
 appli.use(express.static("public"))
 
 io.on('connection', (socket) => {
-  socket.on('getId',(msg)=>{
-	  id++
-	  console.log("ID",id,"has been gived")
-	  io.emit('getId',{id})
+  socket.on('getId', (msg) => {
+    id++
+    //console.log("ID", id, "has been gived")
+    io.emit('getId', { id })
   })
 
-  socket.on('heartbeat',(msg)=>{
-    io.emit('heartbeat',{
+  socket.on('heartbeat', (msg) => {
+    io.emit('heartbeat', {
       emitter: msg.id,
       receiver: msg.receiver
     })
   })
 
-  socket.on('chatMessage',(msg)=>{
-    io.emit('chatMessage',msg)
+  socket.on("saveMap",({mapName,mapDataEdited})=>{
+    fs.writeFileSync("./public/maps/"+mapName+".json",
+      JSON.stringify(mapDataEdited,null,2)
+    )
   })
 
-  socket.on('imHere',(msg)=>{
-    io.emit('imHere',{
+  socket.on('chatMessage', (msg) => {
+    io.emit('chatMessage', msg)
+  })
+
+  socket.on('imHere', (msg) => {
+    io.emit('imHere', {
       emitter: msg.emitter,
       receiver: msg.receiver
     })
   })
-  
-  socket.on('coming',(msg)=>{
-	  actualPlayers[msg.id] = msg
-	  io.emit('newPlayer',msg)
-  })
-  
-  socket.on('askExistingPlayers',(msg)=>{
-	  io.emit('askExistingPlayers',actualPlayers)
-  })
-  
-  socket.on('movement',(msg)=>{
-	  actualPlayers[msg.id] = msg
-	  io.emit('movement',msg)
+
+  socket.on('coming', (msg) => {
+    actualPlayers[msg.id] = msg
+    io.emit('newPlayer', msg)
   })
 
-  socket.on('setState',(msg)=>{
-	  io.emit('setState',msg)
+  socket.on('askExistingPlayers', (msg) => {
+    io.emit('askExistingPlayers', actualPlayers)
   })
-  
-  socket.on('leaving',(msg)=>{
+
+  socket.on('movement', (msg) => {
+    actualPlayers[msg.id] = msg
+    io.emit('movement', msg)
+  })
+
+  socket.on('setState', (msg) => {
+    io.emit('setState', msg)
+  })
+
+  socket.on('leaving', (msg) => {
     msg.id = parseInt(msg.id)
-	  console.log("ID",msg.id,"has been removed")
-	  delete actualPlayers[msg.id]
-	  io.emit('leaving',{id:msg.id})
+    //console.log("ID", msg.id, "has been removed")
+    delete actualPlayers[msg.id]
+    io.emit('leaving', { id: msg.id })
   })
-  
+
   socket.on('disconnect', () => {
   });
-  
-  socket.on('quit',()=>{
-	  if(app) process.exit()
+
+  socket.on('quit', () => {
+    if (app) process.exit()
   })
 });
 
-server.listen(PORT,()=>{
-	console.log("Server started at port",PORT)
+server.listen(PORT, () => {
+  console.log("Server started at port", PORT)
 })
 
 //Front
 // if(mode=="electron")
-if(app) {
-	const path = require('path')
+if (app) {
+  const path = require('path')
 
-	function createWindow () {
-	  const win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		webPreferences: {
-		  preload: path.join(__dirname, 'preload.js')
-		}
-	  })
+  function createWindow() {
+    const win = new BrowserWindow({
+      width: 800,
+      height: 600,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js')
+      }
+    })
 
-	  win.loadURL('http://localhost:'+PORT+'/start.html')
-	  win.setMenu(null)
-	  win.setFullScreen(true);
-	}
+    win.loadURL('http://localhost:' + PORT + '/start.html')
+    win.setMenu(null)
+    win.setFullScreen(true);
+  }
 
-	app.whenReady().then(() => {
-	  createWindow()
-	  app.on('activate', () => {
-		if (BrowserWindow.getAllWindows().length === 0) {
-		  createWindow()
-		}
-	  })
-	})
+  app.whenReady().then(() => {
+    createWindow()
+    app.on('activate', () => {
+      if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow()
+      }
+    })
+  })
 
-	app.on('window-all-closed', () => {
-	  if (process.platform !== 'darwin') {app.quit()}
-	})
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') { app.quit() }
+  })
 }

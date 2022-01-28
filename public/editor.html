@@ -1,0 +1,270 @@
+<html>
+
+<body draggable="false" bgcolor="black">
+  <script src="/socket.io/socket.io.js"></script>
+	<style>
+		@font-face {
+			font-family: "8bit";
+			src: url("../assets/fonts/8bit.ttf")
+		}
+
+		select,
+		button {
+			font-family: "8bit";
+			background: black;
+			border: 2px solid #4f4f4f;
+			border-radius: 5px;
+			/* padding-left: 45px; */
+			/* padding-right: 45px; */
+			padding-top: 15px;
+			padding-bottom: 15px;
+			position: relative;
+			color: white;
+		}
+
+		option {
+			font-family: 8bit;
+			background: black;
+			border: 2px solid #4f4f4f;
+			border-radius: 5px;
+			/* padding-left: 45px; */
+			/* padding-right: 45px; */
+			padding-top: 15px;
+			padding-bottom: 15px;
+			position: relative;
+			color: white;
+		}
+	</style>
+	<script src="/AllStructures.js">
+
+	</script>
+	<script src="/AllTiles.js">
+
+	</script>
+	<select id="mapList" style="position:absolute;z-index:2;"></select>
+    <div id="tileChoices" style="text-align:center"></div>
+    <div id="mapEditor" style="position:absolute;top:110px;left:0px;z-index:1;" ></div>
+    <div id="optionsPanel" style="position:absolute;bottom:30px;left:0px;">
+      <button onclick="save()" style="margin-left:8px">Sauvegarder</button>
+      
+      <button onclick="createmap()" style="margin-left:8px">Créer une carte</button>
+
+      <button onclick="addLine(0)" style="margin-left:16px">+🢁</button>
+      <button onclick="addLine(1)" style="margin-left:8px">+🢀</button>
+      <button onclick="addLine(2)" style="margin-left:8px">+🢂</button>
+      <button onclick="addLine(3)" style="margin-left:8px">+🢃</button>
+      <button onclick="removeLine(0)" style="margin-left:16px">-🢁</button>
+      <button onclick="removeLine(1)" style="margin-left:8px">-🢀</button>
+      <button onclick="removeLine(2)" style="margin-left:8px">-🢂</button>
+      <button onclick="removeLine(3)" style="margin-left:8px">-🢃</button>
+    </div>
+  </body>
+  <style>
+    table {
+      border-spacing:5; /* Removes the cell spacing via CSS */
+      border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
+    }
+    .models {
+      border: 3px solid transparent
+    }
+    .models:hover {
+      border: 3px solid #ff00008f
+    }
+  </style>
+  <script>
+    mapSelected = location.href.split("?edit=")[1]
+    var socket = io()
+    selectedModel = "grass"
+    selectedMode = "tiles"
+    mapDataEdited = null
+    mousedown = false
+    window.addEventListener('mousedown',()=>{
+      mousedown = true
+    })
+
+    window.addEventListener('mouseup',()=>{
+      mousedown = false
+    })
+
+    mapListElem = document.getElementById("mapList")
+    mapEditor = document.getElementById("mapEditor")
+    tileChoices = document.getElementById("tileChoices")
+    fetch('/allMaps')
+    .then(res=>res.json())
+    .then((mapList)=>{
+      mapList.forEach((mapName)=>{
+        let option = document.createElement('option')
+        option.value = mapName
+        option.innerText = mapName
+        mapListElem.appendChild(option)
+      })
+
+      getMapData(mapListElem.options[mapListElem.selectedIndex].value)
+    })
+
+    mapListElem.addEventListener('change',()=>{
+      setTimeout(()=>{
+        getMapData(mapListElem.options[mapListElem.selectedIndex].value)
+      })
+    })
+
+    function getMapData(map){
+      fetch('/maps/'+map+'.json')
+      .then(res=>res.json())
+      .then(refreshMap)
+    }
+
+//A FAIRE
+
+    function createmap(){
+      /*mapname = prompt("Quel est le nom de la nouvelle carte ?")
+      //code pour creer {mapname}.json
+      location.href="editor.html?edit="+mapname
+      //faire que ca select l'option <select>{mapname}</select>*/
+    }
+
+    function refreshMap(mapData) {
+        mapDataEdited = [...mapData]
+        mapEditor.innerHTML = ""
+        console.log("Refreshing map!")
+        let tableElem = document.createElement('table')
+        tableElem.setAttribute("cellspacing","0")
+        tableElem.setAttribute("cellpadding","0")
+        mapDataEdited.forEach((line,i)=>{
+          let lineElem = document.createElement('tr')
+          //console.log(line.length)
+          line.forEach((tile,j)=>{
+            let tileElem = document.createElement('td')
+            tileElem.setAttribute('tileData',tile)
+            let imgTile = document.createElement('img')
+            imgTile.classList = ["tile"]
+            imgTile.style.userSelect = "none"
+            imgTile.style.width = (window.innerWidth / line.length) +"px"
+            imgTile.style.height = ((window.innerHeight-200) / mapDataEdited.length) +"px"
+            imgTile.setAttribute("draggable","false")
+            window.addEventListener('resize',()=>{
+              imgTile.style.width = (window.innerWidth / line.length) +"px"
+              imgTile.style.height = ((window.innerHeight-200) / mapDataEdited.length) +"px"
+            })
+            imgTile.addEventListener('mousedown',()=>{
+              mapDataEdited[i][j] = selectedModel
+              tileElem.setAttribute('tileData',selectedModel)
+              imgTile.src = "/assets/"+selectedMode+"/"+selectedModel+".png"
+            })
+            imgTile.addEventListener('mouseover',()=>{
+              if(!mousedown) return;
+              mapDataEdited[i][j] = selectedModel
+              tileElem.setAttribute('tileData',selectedModel)
+              imgTile.src = "/assets/"+selectedMode+"/"+selectedModel+".png"
+            })
+            if(AllTiles.indexOf(tile)!=-1) {
+              //if(tile=='void') tile = 'voidOld'
+              imgTile.src = "/assets/tiles/"+tile+'.png'
+            }
+            else if(AllStructures.indexOf(tile)!=-1) {imgTile.src = "/assets/structures/"+tile+'.png'}
+            tileElem.appendChild(imgTile)
+            lineElem.appendChild(tileElem)
+          })
+          tableElem.appendChild(lineElem)
+        })
+        mapEditor.appendChild(tableElem)
+    }
+
+    excludeTiles = ['door','door2','air','void','tour','voidOld']
+
+    AllTiles.forEach((tile)=>{
+      if(excludeTiles.indexOf(tile)!=-1) return;
+      let imgModel = document.createElement('img')
+      imgModel.src= "/assets/tiles/"+tile+'.png'
+      imgModel.classList = ["models"]
+      imgModel.style.width = "40px"
+      imgModel.style.userSelect = "none"
+      imgModel.setAttribute("draggable","false")
+      imgModel.style.height = "40px"
+      imgModel.style.marginLeft = "15px"
+      if(tile=="grass") imgModel.style.border = "3px solid red";
+      imgModel.addEventListener('mousedown',()=>{
+        document.querySelectorAll(".models").forEach((model)=>{
+          model.style.border = "";
+        })
+        imgModel.style.border = "3px solid red";
+        selectedMode = "tiles"
+        selectedModel = tile
+      })
+      tileChoices.appendChild(imgModel)
+    })
+    var br = document.createElement('br')
+    tileChoices.appendChild(br)
+    AllStructures.forEach((structure)=>{
+      //if(excludeTiles.indexOf(tile)!=-1) return;
+      let imgModel = document.createElement('img')
+      imgModel.src= "/assets/structures/"+structure+'.png'
+      imgModel.classList = ["models"]
+      imgModel.style.width = "40px"
+      imgModel.style.userSelect = "none"
+      imgModel.setAttribute("draggable","false")
+      imgModel.style.height = "40px"
+      imgModel.style.marginLeft = "15px"
+      imgModel.style.border = 
+      imgModel.addEventListener('mousedown',()=>{
+        document.querySelectorAll(".models").forEach((model)=>{
+          model.style.border = "";
+        })
+        imgModel.style.border = "3px solid red";
+        selectedMode = "structures"
+        selectedModel = structure
+      })
+      tileChoices.appendChild(imgModel)
+    })
+
+    function save() {
+      mapName = mapListElem.options[mapListElem.selectedIndex].value
+      socket.emit("saveMap",{mapName, mapDataEdited})
+    }
+
+    function addLine(direction){
+      mapXLengthmap = mapDataEdited[0].length
+      voidLine = new Array()
+      for (i = 0; i < mapXLengthmap; i++) {voidLine[i] = 'void'}
+      if(direction==0) {
+        mapDataEdited.unshift(voidLine)
+      }
+      if(direction==2) {
+        mapDataEdited.forEach((line,i)=>{
+          mapDataEdited[i].push('void')
+        })
+      }
+      if(direction==3) {
+        mapDataEdited.push(voidLine)
+      }
+      if(direction==1) {
+        mapDataEdited.forEach((line,i)=>{
+          mapDataEdited[i].unshift('void')
+        })
+      }
+      refreshMap(mapDataEdited)
+    }
+    function removeLine(direction){
+      mapXLengthmap = mapDataEdited[0].length
+      voidLine = new Array()
+      for (i = 0; i < mapXLengthmap; i++) {voidLine[i] = 'void'}
+      if(direction==0) {
+        mapDataEdited = mapDataEdited.slice(1,mapDataEdited.length)
+      }
+      if(direction==2) {
+        mapDataEdited.forEach((line,i)=>{
+          mapDataEdited[i] = mapDataEdited[i].slice(0,mapDataEdited[i].length-1)
+        })
+      }
+      if(direction==3) {
+        mapDataEdited = mapDataEdited.slice(0,mapDataEdited.length-1)
+      }
+      if(direction==1) {
+        mapDataEdited.forEach((line,i)=>{
+          mapDataEdited[i] = mapDataEdited[i].slice(1,mapDataEdited[i].length)
+        })
+      }
+      refreshMap(mapDataEdited)
+    }
+  </script>
+</html>

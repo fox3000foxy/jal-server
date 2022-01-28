@@ -24,6 +24,10 @@ var overlaps = (function () {
         tileRelativeCoordinate = -(pos2[1][1] - pos1[1][1])%46
         pos1[0][1] = pos1[0][1] + tileRelativeCoordinate - 46
         pos1[0][0] = pos1[0][0] + tileRelativeCoordinate + 2
+        if(AllStructures.indexOf(a.getAttribute("tileName"))!=-1)
+        {
+          pos1[1][0] = pos1[1][0] + 150 - 46
+        }
         collideTileDemo.style.left = pos1[0][0]
         collideTileDemo.style.top = pos1[1][0]
         collideTileDemo.style.width = 59

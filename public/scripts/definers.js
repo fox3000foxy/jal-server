@@ -6,13 +6,14 @@ if(location.href.indexOf("index.html")!=-1) {
   structures = [...AllStructures]
   let AllPlacableBox = AllTiles.concat(AllStructures)
   AllPlacableBox.forEach((img)=>{
-    eval(img.substr(0,2)+' = "'+img+'"')
+    //if(img!="voidOld")
+    //eval(img.substr(0,2)+' = "'+img+'"')
   })
 
   //Collisionnables
   collisionables = structures.concat([
       'void',
-      wa
+      'water'
   ])
 
   //Define the tile size

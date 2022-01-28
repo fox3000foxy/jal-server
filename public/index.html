@@ -1,18 +1,37 @@
 <html>
-	<head>
-		<link rel="stylesheet" href="styles/isometrify.css">
-		<link rel="stylesheet" href="styles/centrify.css">
-		<link rel="stylesheet" href="styles/menus.css">
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="allTiles.js"></script>
-		<script src="allStructures.js"></script>
-		<script src="scripts/Importer.js"></script>
-		<script src="scripts/injector.js"></script>
-		<script src="scripts/openingCircle.js"></script>
-		<script src="scripts/badEaster.js"></script>
-		<script src="scripts/jquery.min.js"></script>
-		<script src="./scripts/translator.js"></script>
-		<script>
+
+<head>
+	<link rel="stylesheet" href="styles/isometrify.css">
+	<link rel="stylesheet" href="styles/centrify.css">
+	<link rel="stylesheet" href="styles/menus.css">
+	<script src="/socket.io/socket.io.js">
+
+	</script>
+	<script src="allTiles.js">
+
+	</script>
+	<script src="allStructures.js">
+
+	</script>
+	<script src="scripts/Importer.js">
+
+	</script>
+	<script src="scripts/injector.js">
+
+	</script>
+	<script src="scripts/openingCircle.js">
+
+	</script>
+	<script src="scripts/badEaster.js">
+
+	</script>
+	<script src="scripts/jquery.min.js">
+
+	</script>
+	<script src="./scripts/translator.js">
+
+	</script>
+	<script>
 		window.addEventListener('load',()=>{inject()})
 		window.addEventListener('beforeunload',()=>{
       //document.body.style.transform = `scale(${1})`;
@@ -24,51 +43,56 @@
 				location.href = "menu.html"
 			})
 		}
-		</script>
-		<style>
-			#mapBox{
-				left:-340px;
-				top:-152px;
-				width:0px;
-				height:0px
-			}
-			#tchat{
-				position:absolute;
-				left:15px;
-				bottom:15px;
-				z-index: 5
-			}
-			#tchatInput {
-				background: #0f0f0f8f;
-				width:300px;
-				text-align:left;
-				font-size:8px;
-			}
-			#tchatBox{
-				width:300px;
-				height:250px;
-				background: #0f0f0f8f;
-				display: flex;
-				flex-direction: column-reverse;
-				text-align:left;
-			}
-			.tchatMessage {
-				text-align:left;
-				font-size:8px;
-				margin:3px
-			}
-		</style>
-	</head>
-	<body>
-		<div id="sky"></div>
-		<div id="mapBox" class="mapBox center" style="">
-			<div id="map" style="position:relative"></div>
-		</div>
-		<div id="players"></div>
-		<!-- EscapeMenu -->
-		<div id="overlay" style="visibility:hidden;z-index:98"></div>
-		<div id="escapeMenu" style="visibility:hidden;z-index:99" class="center">
-				<img src="assets/fonts/banner.jpg">
+	</script>
+	<style>
+		#mapBox {
+			left: -340px;
+			top: -152px;
+			width: 0px;
+			height: 0px
+		}
+
+		#tchat {
+			position: absolute;
+			left: 15px;
+			bottom: 15px;
+			z-index: 5
+		}
+
+		#tchatInput {
+			background: #0f0f0f8f;
+			width: 300px;
+			text-align: left;
+			font-size: 8px;
+		}
+
+		#tchatBox {
+			width: 300px;
+			height: 250px;
+			background: #0f0f0f8f;
+			display: flex;
+			flex-direction: column-reverse;
+			text-align: left;
+		}
+
+		.tchatMessage {
+			text-align: left;
+			font-size: 8px;
+			margin: 3px
+		}
+	</style>
+</head>
+
+<body>
+	<div id="sky"></div>
+	<div id="mapBox" class="mapBox center" style="">
+		<div id="map" style="position:relative"></div>
+	</div>
+	<div id="players"></div>
+	<!-- EscapeMenu -->
+	<div id="overlay" style="visibility:hidden;z-index:98"></div>
+	<div id="escapeMenu" style="visibility:hidden;z-index:99" class="center">
+		<img src="assets/fonts/banner.jpg">
 				<button class="IndexWidth" onclick="leave()">label.quitButton</button>			
 		</div>
 		<div id="tchat" style="opacity:0">

@@ -1,12 +1,16 @@
 <html>
-	<head>
-		<link rel="stylesheet" href="./styles/menus.css">
-		<link rel="stylesheet" href="./styles/centrify.css">
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="/scripts/openingCircle.js"></script>
-		<script src="./scripts/translator.js"></script>
-		<script>
-			var socket = io()
+
+<head>
+	<link rel="stylesheet" href="./styles/menus.css">
+	<link rel="stylesheet" href="./styles/centrify.css">
+	<script src="/socket.io/socket.io.js">
+	</script>
+	<script src="/scripts/openingCircle.js">
+	</script>
+	<script src="./scripts/translator.js">
+	</script>
+	<script>
+		var socket = io()
 			returnButton = ()=>{
 				closingCircle(()=>{
 					location.href = "/menu.html"
@@ -18,55 +22,56 @@
 				  name = document.getElementById('name').value
 				  if(name!='') {
 					localStorage.setItem('name',name)
+          localStorage.setItem('type',type)
 					location.href = "/index.html?type="+type+"&name="+name
 					}
 				})
 			}
+	</script>
+	<style>
+		* {
+			--selectable-width: 64px;
+		}
 
+		.characterSelectable {
+			/*object-fit: cover; /* Do not scale the image */
+			/*object-position: top; /* Center the image within the element */
+			width: var(--selectable-width);
+			height: calc(var(--selectable-width) * 1.2);
+			border: 2px solid black;
+			background-color: #1e1e1e;
+		}
 
-		</script>
-		<style>
-			*{
-				--selectable-width: 64px;
-			}
-		
-			.characterSelectable {
-			  /*object-fit: cover; /* Do not scale the image */
-			  /*object-position: top; /* Center the image within the element */
-			  width: var(--selectable-width);
-			  height: calc(var(--selectable-width) * 1.2);
-			  border: 2px solid black;
-			  background-color: #1e1e1e;
-			}
-			
-			.characterName {
-			  width: calc(var(--selectable-width) - 10px);
-			  border-left: 2px solid black;
-			  border-right: 2px solid black;
-			  border-bottom: 2px solid black;
-			  background-color: #2e2e2e;
-			  padding: 5px;
-			  display: block;
-			  margin-right:0px;
-			  font-size: calc(var(--selectable-width) / 8)
-			}
-			.characterBox {
-			  align-items: center;
-			}
-			
-			figure.item {
-				vertical-align: top;
-				display: inline-block;
-				text-align: center;
-        margin-right:2px;
-        margin-left:2px;
-				/*width: 120px;*/
-			}
-		</style>
-		<meta charset="UTF-8">
-	</head>
-	<body style="clip-path: circle(0% at center center);">
-		<div id="bg">
+		.characterName {
+			width: calc(var(--selectable-width) - 10px);
+			border-left: 2px solid black;
+			border-right: 2px solid black;
+			border-bottom: 2px solid black;
+			background-color: #2e2e2e;
+			padding: 5px;
+			display: block;
+			margin-right: 0px;
+			font-size: calc(var(--selectable-width) / 8)
+		}
+
+		.characterBox {
+			align-items: center;
+		}
+
+		figure.item {
+			vertical-align: top;
+			display: inline-block;
+			text-align: center;
+			margin-right: 2px;
+			margin-left: 2px;
+			/*width: 120px;*/
+		}
+	</style>
+	<meta charset="UTF-8">
+</head>
+
+<body style="clip-path: circle(0% at center center);">
+	<div id="bg">
 		<div class="center">
 			<img src="assets/fonts/banner.jpg"><br>
       <input id="name" placeholder="Nom">
@@ -105,9 +110,13 @@
         return figure
       }
       selectCharacterMenu = document.getElementById('selectCharacter')
-      types = ['Renard','Humain','Chat','Chevre','Chien','Cochon','Lapin','Poule','Singe','Souris','Vache']
-      types.forEach((type)=>{
-        selectCharacterMenu.appendChild(createCharacter(type))
+
+      fetch('/allCharacters')
+      .then(res=>res.json())
+      .then((types)=>{
+        types.forEach((type)=>{
+          selectCharacterMenu.appendChild(createCharacter(type))
+        })
       })
 	  if(localStorage.name)
       document.getElementById('name').value = localStorage.name

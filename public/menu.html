@@ -10,7 +10,6 @@
         ldd.setAttribute('autoplay','')
         ldd.setAttribute('loop','')
         ldd.src = '/assets/musics/didadou.mp3'
-        document.body.appendChild(ldd)
 			var socket = io()
 			quitButton = ()=>{socket.emit('quit',null)
 			alert('Pour le moment, ce bouton ne sert à rien, mais il aura une utilité, ne vous inquiétez pas (・ω・)')}
@@ -27,6 +26,11 @@
 			mpButton = ()=>{
 				closingCircle(()=>{
 					location.href = "/multiplayer.html"
+				})
+			}	
+      editorButton = ()=>{
+				closingCircle(()=>{
+					location.href = "/editor.html"
 				})
 			}
 		</script>
@@ -47,6 +51,7 @@
 			<img src="assets/fonts/banner.jpg">
 			<button onclick="playButton()">label.playButton</button><br><br>
 			<button onclick="mpButton()">label.mpButton</button><br><br>
+			<button onclick="editorButton()">Editeur</button><br><br>
 			<button onclick="creditButton()">label.creditButton</button><br><br>
 			<button onclick="quitButton()">label.quitButton</button>
 		</div>

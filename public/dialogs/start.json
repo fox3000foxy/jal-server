@@ -4,10 +4,31 @@
     "type": "Chevre"
   },
   "messages": [
-    {"speaker":1,"message":"Hello !"},
-    {"speaker":1,"message":"Comment tu vas ?"},
+    {"speaker":1,"message":"Salut Larry, comment tu vas ?"},
     {"speaker":2,"message":"Bien et toi ?"},
-    {"speaker":1,"message":"Ceci est un dialogue de test"},
-    {"speaker":1,"message":"Je confirme que mon sourire est con."}
+    {"speaker":1,"message":"Je sais que tu sais quelque chose que je ne sais pas..."},
+    {"speaker":2,"message":"En effet, et tu ne le saura que quand tu seras prêt."},
+    {"speaker":1,"message":"Prêt à ?"},
+    {"speaker":2,"message":"Tout d'abord, je vais t'apprendre les bases du jeu."},
+    {"speaker":2,"message":"Comme tu as pu le remarquer, tu te déplaces avec les touches fléchées."},
+    {"speaker":1,"message":"Oui, pour le moment c'est facile de se déplacer."},
+    {"speaker":2,"message":"Savais tu que tu pouvais courir avec SHIFT ?"},
+    {"speaker":1,"message":"Si je ne le savais pas, maintenant je le sais !"},
+    {"speaker":2,"message":"Ensuite, tu peux sauter avec ESPACE."},
+    {"speaker":1,"message":"Je ne saute pas très haut..."},
+    {"speaker":2,"message":"Oui mais au moins tu peux sauter, et c'est cool de pouvoir sauter."},
+    {"speaker":1,"message":"Et ça me servira de savoir sauter ?"},
+    {"speaker":2,"message":"Tu verras..."},
+    {"speaker":2,"message":"Pour ce qui est des contrôles c'est tout pour le moment."},
+    {"speaker":1,"message":"Pour le moment ?"},
+    {"speaker":2,"message":"Tu verras aussi..."},
+    {"speaker":1,"message":"J'ai plein de choses à découvrir, compris !"},
+    {"speaker":2,"message":"Tu as aussi le mode multijoueur, où tu peux jouer avec tes amis."},
+    {"speaker":1,"message":"C'est sympa ça !"},
+    {"speaker":2,"message":"J'ai fini."},
+    {"speaker":2,"message":"Ah et une dernière chose !"},
+    {"speaker":2,"message":"Si tu remarque un bug, fait en part aux développeurs."},
+    {"speaker":1,"message":"Compris ! Merci Larry ! Au revoir !"},
+    {"speaker":2,"message":"À la prochaine !"}
   ]
 }

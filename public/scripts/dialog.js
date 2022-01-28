@@ -32,7 +32,7 @@ function speaking(num) {
 
 }
 window.addEventListener('keydown', (ev) => {
-    if (ev.key != "A") {
+    if (ev.key == " ") {
         txtnum += 1;
         text();
         //alert(letter == txt.length - 1)
@@ -63,6 +63,7 @@ fetch('/dialogs/' + dialogId + '.json')
         dialog = res2.messages
         pnjName = res2.toSpeak.name
         document.getElementById(`perso2`).src = './assets/characters/' + res2.toSpeak.type + '/idle.gif'
+        document.getElementById(`perso1`).src = './assets/characters/' + localStorage.type + '/idle.gif'
         text()
     })
 

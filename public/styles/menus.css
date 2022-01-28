@@ -26,6 +26,8 @@ button {
 	text-align:center;
 }
 
+
+
 .IndexWidth {
 	width: 150px;
 	/* padding-left: 35px; */
@@ -39,7 +41,7 @@ button:hover {
 }
 
 #bg {
-  background-image: url('../assets/fonts/menu.jpg');
+  background-image: url('../assets/fonts/menu2.jpg');
   background-size: 100% 100%;
   position:absolute;
   top:0;

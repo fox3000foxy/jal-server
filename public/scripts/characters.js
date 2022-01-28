@@ -31,6 +31,7 @@ function CreateCharacter(characterElement) {
     character.style.left = "0px"
     character.style.top = "0px"
     character.style.zIndex = "1"
+    characterElement.style.zIndex = "2"
 
     characterShadow.src = character.src
     characterShadow.setAttribute('class', 'characterShadow')
@@ -162,9 +163,10 @@ function CreateCharacter(characterElement) {
             if (pressed.down) {
                 mapBox.style.top = (parseInt(mapBox.style.top) - (self.speed * pressed.run)) + "px"
             }
-            collisionables.forEach((tileName) => {
-
+            collisionables.forEach((tileName,j) => {
+                //console.log(tileName,j)
                 document.querySelectorAll("[src*=" + tileName + "]").forEach((voidTile, i) => {
+                    //console.log(voidTile)
                     //if(i!=0) return
                     let myPlayer = getPlayer('me').querySelector(".collisionBox")
                     if (overlaps(voidTile, myPlayer).collide) {
@@ -224,9 +226,9 @@ function CreateCharacter(characterElement) {
             otherCharacter.style.left = myCoordX - coordX
             otherCharacter.style.top = myCoordY - coordY
 
-            characterElement.style.zIndex = "2"
+            /*characterElement.style.zIndex = "2"
             if (myCoordY > coordY) otherCharacter.style.zIndex = "3"
-            else otherCharacter.style.zIndex = "1"
+            else otherCharacter.style.zIndex = "1"*/
 
         })
 
