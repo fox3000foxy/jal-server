@@ -82,10 +82,11 @@ function CreateCharacter(characterElement) {
 
     if (localStorage.coordinates && me) {
         if (JSON.parse(localStorage.coordinates).x) mapBox.style.left = JSON.parse(localStorage.coordinates).x
-        else
-        mapBox.style.left = "0px"
         if (JSON.parse(localStorage.coordinates).y) mapBox.style.top = JSON.parse(localStorage.coordinates).y
-        else
+
+      if(JSON.parse(localStorage.coordinates).x=="")
+        mapBox.style.left = "0px"
+      if(JSON.parse(localStorage.coordinates).y=="") 
         mapBox.style.top = "-1350px"
         if (JSON.parse(localStorage.coordinates).d) self.dir = JSON.parse(localStorage.coordinates).d
     }
@@ -235,6 +236,14 @@ function CreateCharacter(characterElement) {
             else otherCharacter.style.zIndex = "1"*/
 
         })
+        if(!localStorage.coordinates){
+          localStorage.setItem('coordinates',JSON.stringify({
+            x:"0",
+            y:"-1350",
+            dir: 1
+          }))
+          location.reload()
+        }
 
 
         if (me) {
