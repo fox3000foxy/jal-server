@@ -30,8 +30,8 @@ function createNPC(n){
 	// console.log(p.dir)
 	npcElement.setAttribute("style","transform: scaleX("+n.dir+");")
   npcElement.setAttribute("defaultDir",n.dir)
+  if(n.dialog) npcElement.setAttribute('speechBubble','')
   if(n.dialog) npcElement.addEventListener('mousedown',()=>{
-    npcElement.setAttribute('speechBubble','')
     if(getDistance(
         Math.abs(myCoordX),
         Math.abs(myCoordY),
