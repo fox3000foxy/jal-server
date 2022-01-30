@@ -78,6 +78,18 @@ io.on('connection', (socket) => {
       receiver: msg.receiver
     })
   })
+  
+  socket.on('createMap',(msg) => {
+	  console.log("CreatingMap")
+	  let createdArray = new Array()
+	  lineLength = new Array(20)
+	  for (i=0;i<10;i++) {
+		createdArray.push(lineLength)
+	  }
+	fs.writeFileSync("./public/maps/"+mapName+".json",
+      JSON.stringify(createdArray,null,2)
+    )
+  })
 
   socket.on('coming', (msg) => {
     actualPlayers[msg.id] = msg
