@@ -22,6 +22,9 @@ appli.get('/isJALserver', (req, res) => { res.send(200) })
 appli.get('/allCharacters', (req, res) => {
    res.send(JSON.stringify(fs.readdirSync('./public/assets/characters')))
 })
+appli.get('/favicon.ico',(req,res)=>{
+  res.sendFile(__dirname+"/public/assets/icon.png")
+})
 appli.get('/allTiles.js', (req, res) => {
   let dirFiles = fs.readdirSync('./public/assets/tiles')
   for (i = 0; i < dirFiles.length; i++) {

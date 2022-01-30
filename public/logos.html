@@ -62,10 +62,10 @@
 						i = 0
 					} else if (ev.key == "ArrowRight"  && location.href.indexOf("#4")==-1) {
 						if (nb != logos.length - 1 && location.href.indexOf("#4")==-1) location.href = "#" + (nb + 1)
-						else location.href = redirect
+						else redirection()
 						nb++
 						i = 0
-					} else if (ev.key != "ArrowLeft") location.href = redirect
+					} else if (ev.key != "ArrowLeft") redirection()
 				})
 
 				i = 0;
@@ -86,6 +86,12 @@
 					i++
 				}, 10)
 			}
+
+      fuction redirection() {
+        closingCircle(()=>{
+          location.href = redirect
+        })
+      }
 		</script>
 	</body>
 </html>
