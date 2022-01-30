@@ -6,10 +6,10 @@
 		<script src="/scripts/openingCircle.js"></script>
 		<script src="./scripts/translator.js"></script>
 		<script>
-       ldd = document.createElement('audio')
+       /*ldd = document.createElement('audio')
         ldd.setAttribute('autoplay','')
         ldd.setAttribute('loop','')
-        ldd.src = '/assets/musics/didadou.mp3'
+        ldd.src = '/assets/musics/didadou.mp3'*/
 			var socket = io()
 			quitButton = ()=>{socket.emit('quit',null)
 			alert('Pour le moment, ce bouton ne sert à rien, mais il aura une utilité, ne vous inquiétez pas (・ω・)')}
@@ -51,7 +51,7 @@
 			<img src="assets/fonts/banner.jpg">
 			<button onclick="playButton()">label.playButton</button><br><br>
 			<button onclick="mpButton()">label.mpButton</button><br><br>
-			<button onclick="editorButton()">Editeur</button><br><br>
+			<!-- <button onclick="editorButton()">Editeur</button><br><br> -->
 			<button onclick="creditButton()">label.creditButton</button><br><br>
 			<button onclick="quitButton()">label.quitButton</button>
 		</div>

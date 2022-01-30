@@ -17,7 +17,7 @@ const io = new Server(server);
 
 appli.use(cors())
 
-appli.get('/', (req, res) => { res.sendFile(__dirname + '/public/start.html') })
+appli.get('/', (req, res) => { res.sendFile(__dirname + '/public/logos.html') })
 appli.get('/isJALserver', (req, res) => { res.send(200) })
 appli.get('/allCharacters', (req, res) => {
    res.send(JSON.stringify(fs.readdirSync('./public/assets/characters')))
