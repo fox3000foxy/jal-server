@@ -127,7 +127,8 @@ if (app) {
       height: 600,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js')
-      }
+      },
+       icon: __dirname + '/public/assets/logo.png'
     })
 
     win.loadURL('http://localhost:' + PORT + '/start.html')
