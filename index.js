@@ -128,10 +128,10 @@ if (app) {
       webPreferences: {
         preload: path.join(__dirname, 'preload.js')
       },
-       icon: __dirname + '/public/assets/logo.png'
+       icon: __dirname + '/public/assets/icon.png'
     })
 
-    win.loadURL('http://localhost:' + PORT + '/start.html')
+    win.loadURL('http://localhost:' + PORT + '/logos.html')
     win.setMenu(null)
     win.setFullScreen(true);
   }
