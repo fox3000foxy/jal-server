@@ -22,8 +22,8 @@ function place() {
       var tileElement = document.createElement('img')
       //tile = window[tile]
       if (structures.indexOf(tile) != -1) {
-        tileLeft -= 23
-        tileTop -= 105
+        tileLeft -= 23;
+        tileTop -= 105;
         tileElement.src = `assets/structures/${tile}.png`
         document.addEventListener('keydown', () => {
           //console.log()

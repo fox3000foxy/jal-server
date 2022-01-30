@@ -8,7 +8,7 @@ function createPlayer(p){
 	playerElement.setAttribute("coordX",(p.x || 0))
 	playerElement.setAttribute("coordY",(p.y || 0))
 	playerElement.setAttribute("id","player"+p.id)
-  playerElement.setAttribute("nameTag",p.name)
+  playerElement.setAttribute("nameTag",(p.name))
 	// console.log(p.dir)
 	playerElement.setAttribute("style","transform: scaleX("+p.dir+");")
   playerElement.setAttribute("defaultDir",p.dir)
@@ -26,7 +26,7 @@ function createNPC(n){
 	npcElement.setAttribute("coordX",(n.x || 0))
 	npcElement.setAttribute("coordY",(n.y || 0))
 	npcElement.setAttribute("id","npc"+n.id)
-  npcElement.setAttribute("nameTag",n.name)
+  npcElement.setAttribute("nameTag",(n.name || n.id))
 	// console.log(p.dir)
 	npcElement.setAttribute("style","transform: scaleX("+n.dir+");")
   npcElement.setAttribute("defaultDir",n.dir)
@@ -60,10 +60,11 @@ CreateCharacter(createNPC({
 	type:"Chevre",
 	id: "Larry",
 	dir: -1,
-  name: "Larry",
 	me: 0,
-  x:-1950,
-  y:-155,
-  dialog: "start",
-  map: 'debug'
+	// x: 0 * (106) + 53,
+	// y: 1 * (height*2),
+	x:1950,
+	y:155,
+	dialog: "start",
+	map: 'debug'
 }))
