@@ -62,9 +62,12 @@ io.on('connection', (socket) => {
     })
   })
 
-  socket.on("saveMap",({mapName,mapDataEdited})=>{
+  socket.on("saveMap",({mapName,mapDataEdited,npcDataEdited})=>{
     fs.writeFileSync("./public/maps/"+mapName+".json",
       JSON.stringify(mapDataEdited,null,2)
+    )
+	fs.writeFileSync("./public/npcs/"+mapName+".json",
+      JSON.stringify(npcDataEdited,null,2)
     )
   })
 
@@ -80,15 +83,18 @@ io.on('connection', (socket) => {
   })
   
   socket.on('createMap',(msg) => {
-	  console.log("CreatingMap")
+	  // console.log("CreatingMap")
 	  let createdArray = new Array()
 	  lineLength = new Array(20)
 	  for (i=0;i<10;i++) {
 		createdArray.push(lineLength)
 	  }
-	fs.writeFileSync("./public/maps/"+mapName+".json",
-      JSON.stringify(createdArray,null,2)
-    )
+		fs.writeFileSync("./public/maps/"+msg+".json",
+		  JSON.stringify(createdArray,null,2)
+		)
+  })
+  socket.on('deleteMap',(msg) => {
+	fs.unlinkSync("./public/maps/"+msg+".json")
   })
 
   socket.on('coming', (msg) => {
