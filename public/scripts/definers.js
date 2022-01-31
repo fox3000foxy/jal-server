@@ -47,8 +47,8 @@ var qs = QueryStringToJSON();
 
 var dialogUi = document.getElementById("dialogUI")
 if(dialogUi) {
-  function DialogUI(dialogId) {
-    dialogUi.src = "dialog.html?dialogId="+dialogId
+  function DialogUI(dialogId,dialogSpeaker) {
+    dialogUi.src = "dialog.html?dialogId="+dialogId+"&speaker="+dialogSpeaker+"&mapName="+mapName
   }
   dialogUi.onload = ()=>{
     dialogUi.style.display = 'block'

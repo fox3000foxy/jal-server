@@ -54,18 +54,41 @@ function text() {
     }
 }
 
+function QueryStringToJSON() {
+    var pairs = location.search.slice(1).split('&');
+
+    var result = {};
+    pairs.forEach(function(pair) {
+        pair = pair.split('=');
+        result[pair[0]] = decodeURIComponent(pair[1] || '');
+    });
+
+    return JSON.parse(JSON.stringify(result));
+}
+
+var qs = QueryStringToJSON();
+
 dialogId = qs.dialogId
 //console.log(dialogId)
-
-fetch('/dialogs/' + dialogId + '.json')
-    .then(res => res.json())
-    .then(res2 => {
-        dialog = res2.messages
-        pnjName = res2.toSpeak.name
-        document.getElementById(`perso2`).src = './assets/characters/' + res2.toSpeak.type + '/idle.gif'
-        document.getElementById(`perso1`).src = './assets/characters/' + localStorage.type + '/idle.gif'
-        text()
-    })
+fetch('/npcs/'+qs.mapName+'.json')
+.then(res => res.json())
+.then((npcArray)=>{
+	npcArray.forEach((npc)=>{
+		if(npc.id==qs.speaker) {
+			pnjName = npc.name
+			pnjType = npc.type
+			
+			fetch('/dialogs/' + dialogId + '.json')
+			.then(res => res.json())
+			.then(res2 => {
+				dialog = res2.messages
+				document.getElementById(`perso2`).src = './assets/characters/' + pnjType + '/idle.gif'
+				document.getElementById(`perso1`).src = './assets/characters/' + localStorage.type + '/idle.gif'
+				text()
+			})
+		}
+	})
+})
 
 if (parent.document.getElementById(window.name))
     parent.document.getElementById(window.name).focus()

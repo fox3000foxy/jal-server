@@ -1,4 +1,4 @@
-mapName = "debug"
+mapName = qs.mapName || "debug"
 fetch('/maps/'+mapName+'.json')
 .then(res=>res.json())
 .then((mapData)=>{

@@ -18,11 +18,12 @@ function createPlayer(p){
 
 function createNPC(n){
   if(getPlayer(n.id)!=null) return;
+  // if(n.map!=mapName) return;
 	var npcElement = document.createElement('div')
 	npcElement.setAttribute('class','character center')
 	npcElement.setAttribute("player",n.type)
 	npcElement.setAttribute("autoshadow","")
-	npcElement.setAttribute("me",n.me)
+	npcElement.setAttribute("me",0)
 	npcX = ((n.x * (width*2)) - n.y * (height*2) ) + 90
 	npcY = n.y * (height*2) + 90
 	npcElement.setAttribute("coordX",( npcX  || 0))
@@ -41,7 +42,7 @@ function createNPC(n){
         Math.abs(npcY)
       )
 	  // console.log(distance)
-    if(distance < 250) DialogUI(n.dialog)
+    if(distance < 250) DialogUI(n.dialog,n.id)
   }) 
   //playerElement.setAttribute("style","transform: skew("+(-p.dir*45)+"deg,0deg);")
 	return npcElement
@@ -60,15 +61,11 @@ CreateCharacter(createPlayer({
 	me: 1
 }))
 
-CreateCharacter(createNPC({
-	type:"Chevre",
-	id: "Larry",
-	dir: -1,
-	me: 0,
-	x: 3 ,
-	y: 5,
-	// x:1950,
-	// y:155,
-	dialog: "start",
-	map: 'debug'
-}))
+fetch('/npcs/'+mapName+'.json')
+.then(res=>res.json())
+.then(npcArrays=>{
+	npcArrays.forEach(npc=>{
+		console.log("creating npc:",npc)
+		CreateCharacter(createNPC(npc))
+	})
+})

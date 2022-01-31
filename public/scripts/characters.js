@@ -54,14 +54,14 @@ function CreateCharacter(characterElement) {
     nameTag.setAttribute('class', 'nameTag')
     nameTag.innerText = characterElement.getAttribute("nameTag")
     nameTag.style.position = "absolute"
-    nameTag.style.width = "60px"
+    // nameTag.style.width = "60px"
     //nameTag.style.height = "20px"
     nameTag.style.padding = "6px"
     nameTag.style.fontSize = "8px"
     nameTag.style.color = "white"
     nameTag.style.textAlign = "center"
     nameTag.style.background = "#0f0f0f8f"
-    nameTag.style.left = "-8px"
+    nameTag.style.left = "-12px"
     nameTag.style.top = "-20px"
     nameTag.style.transform = `scaleX(${defDir})`;
 

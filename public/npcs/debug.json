@@ -1,0 +1,11 @@
+[
+  {
+    "type": "Poule",
+    "name": "Larry",
+    "id": "Larry",
+    "dir": 1,
+    "x": 3,
+    "y": 5,
+    "dialog": "start"
+  }
+]
