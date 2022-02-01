@@ -202,6 +202,7 @@
 			Name: <input id="npcName" value="${theNpc.name}"><br><br>
 			Dialog ID : <input id="npcDialog" value="${theNpc.dialog}"><br><br>
 			Type : <input id="npcType" value="${theNpc.type}"><br><br>
+			<br><button onclick="deleteNpc('${theNpc.id}')">Supprimer</button>
 		`
 		document.getElementById("errorButtonOK").innerText = "Save"
 		document.getElementById("errorButtonCancel").innerText = "Cancel"
@@ -242,9 +243,19 @@
 				"dialog": errorLabel.querySelector("#npcDialog").value
 			  })
 			document.getElementById("errorButtonCancel").click()
+			refreshNPC(npcDataEdited)
 		}
 		document.getElementById("errorBox").style.display = 'block'
+	}
+	
+	function deleteNpc(npcID) {
+		console.log(npcDataEdited)
+		npcDataEdited = npcDataEdited.filter((el) => {
+		  return el.id !== npcID;
+		});
+		console.log(npcDataEdited)
 		refreshNPC(npcDataEdited)
+		document.getElementById("errorBox").style.display = 'none'
 	}
 
     function refreshMap(mapData,npcData) {
