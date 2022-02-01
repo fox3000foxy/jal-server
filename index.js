@@ -150,8 +150,8 @@ if (app) {
     })
 
     win.loadURL('http://localhost:' + PORT + '/logos.html')
-    win.setMenu(null)
-    win.setFullScreen(true);
+    // win.setMenu(null)
+    // win.setFullScreen(true);
   }
 
   app.whenReady().then(() => {
