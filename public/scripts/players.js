@@ -11,7 +11,7 @@ function createPlayer(p){
   playerElement.setAttribute("nameTag",(p.name))
 	// console.log(p.dir)
 	playerElement.setAttribute("style","transform: scaleX("+p.dir+");")
-  playerElement.setAttribute("defaultDir",p.dir)
+  playerElement.setAttribute("defaultDir",(p.dir || 1))
   //playerElement.setAttribute("style","transform: skew("+(-p.dir*45)+"deg,0deg);")
 	return playerElement
 }
@@ -24,8 +24,8 @@ function createNPC(n){
 	npcElement.setAttribute("player",n.type)
 	npcElement.setAttribute("autoshadow","")
 	npcElement.setAttribute("me",0)
-	npcX = ((n.x * (width*2)) - n.y * (height*2) ) + 90
-	npcY = n.y * (height*2) + 90
+	var npcX = ((n.x * (width*2)) - n.y * (height*2) ) + 90
+	var npcY = n.y * (height*2) + 90
 	npcElement.setAttribute("coordX",( npcX  || 0))
 	npcElement.setAttribute("coordY",( npcY || 0))
 	npcElement.setAttribute("id","npc"+n.id)
@@ -41,7 +41,7 @@ function createNPC(n){
         Math.abs(npcX),
         Math.abs(npcY)
       )
-	  // console.log(distance)
+	  console.log(distance)
     if(distance < 250) DialogUI(n.dialog,n.id)
   }) 
   //playerElement.setAttribute("style","transform: skew("+(-p.dir*45)+"deg,0deg);")

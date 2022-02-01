@@ -81,6 +81,7 @@ previousCoords = {}
 
 function defineSokcketOfMove(){
   socket.on('movement',(msg)=>{
+   // console.log(msg)
     // console.log(msg)
     if(msg.id==myId) return;
     var player = getPlayer(msg.id)
@@ -94,10 +95,20 @@ function defineSokcketOfMove(){
         name: msg.name,
         me: 0
       }))
+      /*console.log({
+        type:msg.type,
+        x: -msg.x,
+        y: -msg.y,
+        dir: msg.d,
+        id: msg.id,
+        name: msg.name,
+        me: 0
+      })*/
       if(newChar) {
         playersList.appendChild()
-        var player = getPlayer(msg.id)
+        player = getPlayer(msg.id)
       }
+      console.log(msg.id)
     }
     player.style.transform = `scaleX(${msg.dir})`;
     player.setAttribute('coordX',msg.x+"px")
@@ -139,10 +150,10 @@ function heartbeat(){
   listPlayer().forEach(playerId=>{
     socket.emit('heartbeat',{id:myId,receiver:playerId})
     kickTimeout[parseInt(playerId)] = setTimeout(()=>{
-      console.log("Clearing:",playerId)
+     // console.log("Clearing:",playerId)
       if(getPlayer(playerId)!=null){
-        getPlayer(playerId).remove()
-        socket.emit('leaving',{id:playerId})
+        //getPlayer(playerId).remove()
+        //socket.emit('leaving',{id:playerId})
       }
     },30000)
   })

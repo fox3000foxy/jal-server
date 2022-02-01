@@ -228,8 +228,8 @@ function CreateCharacter(characterElement) {
         otherCharacters.forEach(otherCharacter => {
             var coordX = parseInt(otherCharacter.getAttribute("coordx"))
             var coordY = parseInt(otherCharacter.getAttribute("coordy"))
-            otherCharacter.style.left = coordX + myCoordX
-            otherCharacter.style.top = coordY + myCoordY
+            otherCharacter.style.left = myCoordX - coordX
+            otherCharacter.style.top = myCoordY - coordY
 
             /*characterElement.style.zIndex = "2"
             if (myCoordY > coordY) otherCharacter.style.zIndex = "3"
