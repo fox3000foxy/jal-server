@@ -111,7 +111,7 @@
 				setTimeout(()=>{
 					if(ev.key=="Enter") {
 						tchatSocket.emit('chatMessage',{
-							name: qs.name,
+							name: localStorage.name,
 							message: tchatInput.value
 						})
 						tchatInput.value = ''
