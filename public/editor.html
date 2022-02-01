@@ -40,6 +40,7 @@
 	<script src="/AllStructures.js"></script>
 	<script src="/AllTiles.js"></script>
 	<select id="mapList" style="position:absolute;z-index:2;"></select>
+	<button style="position:relative;left:120px;z-index:2;" onclick="createNpc()">Create NPC</button>
     <div id="tileChoices" style="text-align:center"></div>
     <div id="mapEditor" style="position:absolute;top:110px;left:0px;z-index:1;" ></div>
     <div id="optionsPanel" style="position:absolute;bottom:30px;left:0px;">
@@ -218,6 +219,33 @@
 		}
 		document.getElementById("errorBox").style.display = 'block'
 	}
+	
+	function createNpc() {
+		document.getElementById("errorLabel").innerHTML = `
+			Creating NPC:<br><br><br>
+			ID: <input id="npcID" value=""><br><br>
+			Name: <input id="npcName" value=""><br><br>
+			Dialog ID : <input id="npcDialog" value=""><br><br>
+			Type : <input id="npcType" value=""><br><br>
+		`
+		document.getElementById("errorButtonOK").innerText = "Save"
+		document.getElementById("errorButtonCancel").innerText = "Cancel"
+		document.getElementById("errorButtonOK").onclick = ()=>{
+			// console.log(nameValue,dialogValue)
+			npcDataEdited.push({
+				"type": errorLabel.querySelector("#npcType").value,
+				"name": errorLabel.querySelector("#npcName").value,
+				"id": errorLabel.querySelector("#npcName").value,
+				"dir": 1,
+				"x": 0,
+				"y": 0,
+				"dialog": errorLabel.querySelector("#npcDialog").value
+			  })
+			document.getElementById("errorButtonCancel").click()
+		}
+		document.getElementById("errorBox").style.display = 'block'
+		refreshNPC(npcDataEdited)
+	}
 
     function refreshMap(mapData,npcData) {
         mapDataEdited = [...mapData]
@@ -287,7 +315,14 @@
         mapEditor.appendChild(tableElem)
 		
 		//NPC PART
-		npcMap = document.createElement('div')
+		refreshNPC(npcDataEdited)
+    }
+	npcMap = null
+	function refreshNPC(npcDataEdited){
+		if(!npcMap) {
+			npcMap = document.createElement('div')
+		}
+		else {npcMap.innerHTML=""}	
 		npcMap.style.position="absolute"
 		npcMap.style.top = 0
 		npcDataEdited.forEach((npc)=>{
@@ -317,11 +352,15 @@
 				imgNPC.style.left =  calculedWidth * npc.x
 				imgNPC.style.top =  calculedHeight * npc.y
 			})
+			imgNPC.style.transform= `scaleX(${npc.dir})`
+			imgNPC.onwheel = ()=>{
+				npc.dir = -npc.dir
+				imgNPC.style.transform= `scaleX(${npc.dir})`
+			}
 			npcMap.appendChild(imgNPC)
 		})
-        mapEditor.appendChild(npcMap)
-    }
-
+		mapEditor.appendChild(npcMap)
+	}
     excludeTiles = ['door','door2','air','void','tour','voidOld']
 
     AllTiles.forEach((tile)=>{

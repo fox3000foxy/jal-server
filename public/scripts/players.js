@@ -51,13 +51,13 @@ function createNPC(n){
 
 getPlayer = (id)=>{return document.getElementById("player"+id)}
 
-var type = qs.type
+var type = localStorage.type
 console.log("Youre playing:",type)
 CreateCharacter(createPlayer({
 	type,
 	id: "me",
 	dir: 1,
-  name: qs.name,
+  name: localStorage.name,
 	me: 1
 }))
 

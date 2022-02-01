@@ -26,7 +26,7 @@ function coming(){
 		y: myCoordY,
 		dir: myDir,
 		id: myId,
-    name: qs.name, 
+    name: localStorage.name, 
 		type,
 	});
 	socket.emit('askExistingPlayers',null)
@@ -72,7 +72,7 @@ function moving(){
 		y: myCoordY,
 		dir: myDir,
 		id: myId,
-    name: qs.name,
+		name: localStorage.name,
 		type
 	})
 }
