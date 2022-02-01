@@ -228,8 +228,14 @@ function CreateCharacter(characterElement) {
         otherCharacters.forEach(otherCharacter => {
             var coordX = parseInt(otherCharacter.getAttribute("coordx"))
             var coordY = parseInt(otherCharacter.getAttribute("coordy"))
-            otherCharacter.style.left = myCoordX - coordX
-            otherCharacter.style.top = myCoordY - coordY
+            if(otherCharacter.getAttribute("id").indexOf("npc")!=-1) {
+              otherCharacter.style.left = myCoordX + coordX
+              otherCharacter.style.top = myCoordY + coordY
+            }
+            else {
+              otherCharacter.style.left = myCoordX - coordX
+              otherCharacter.style.top = myCoordY - coordY
+            }
 
             /*characterElement.style.zIndex = "2"
             if (myCoordY > coordY) otherCharacter.style.zIndex = "3"
