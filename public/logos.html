@@ -18,7 +18,8 @@
 		</style>
 	</head>
 	<body style="cursor:none"><div id="bg"></div>
-		<div class="center">
+		<div class="center"  style="
+      width:100%;">
 			<p id="logo" style="opacity:0;"></p>
       <button id="playbutton"  style="opacity:0;" onclick="closingCircle(()=>{
       location.href= 'menu.html'
@@ -57,12 +58,12 @@
 
 				window.addEventListener('keydown', (ev) => {
 					//console.log(ev.key)
-					if (ev.key == "ArrowLeft" && nb > 0  && location.href.indexOf("#4")==-1) {
+					if (ev.key == "ArrowLeft" && nb > 0  && location.href.indexOf("#5")==-1) {
 						location.href = "#" + (nb - 1)
 						nb--
 						i = 0
-					} else if (ev.key == "ArrowRight"  && location.href.indexOf("#4")==-1) {
-						if (nb != logos.length - 1 && location.href.indexOf("#4")==-1) location.href = "#" + (nb + 1)
+					} else if (ev.key == "ArrowRight"  && location.href.indexOf("#5")==-1) {
+						if (nb != logos.length - 1 && location.href.indexOf("#5")==-1) location.href = "#" + (nb + 1)
 						else redirection()
 						nb++
 						i = 0
@@ -72,16 +73,16 @@
 				i = 0;
 				setInterval(() => {
 					logo.innerHTML = logos[nb]
-				 if(i<=100  && location.href.indexOf("#4")==-1) {logo.style.opacity = i+'%';playbutton.style.opacity = '0%'}
-        if(i>=300 && i<=400  && location.href.indexOf("#4")==-1){logo.style.opacity = (400 - i)+'%'}
-        if(i<=100  && location.href.indexOf("#4")!=-1) {playbutton.style.opacity = i+'%'
+				 if(i<=100  && location.href.indexOf("#5")==-1) {logo.style.opacity = i+'%';playbutton.style.opacity = '0%'}
+        if(i>=300 && i<=400  && location.href.indexOf("#5")==-1){logo.style.opacity = (400 - i)+'%'}
+        if(i<=100  && location.href.indexOf("#5")!=-1) {playbutton.style.opacity = i+'%'
         document.body.style.cursor ="default"}
 					if (i == 500) {
-						if (nb != logos.length - 1  && location.href.indexOf("#4")==-1) {
+						if (nb != logos.length - 1  && location.href.indexOf("#5")==-1) {
 							location.href = "#" + (nb + 1)
 							i = 0
 						} 
-						if(location.href.indexOf("#4")==-1)
+						if(location.href.indexOf("#5")==-1)
             nb += 1
 					}
 					i++
