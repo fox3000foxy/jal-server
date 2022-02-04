@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://jal-server.fox3000.repl.co/pv.html -->
+<html dir="ltr" lang="fr" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	<link rel="stylesheet" href="./pv_files/centrify.css">
+	
+	<script src="./pv_files/Importer.js.téléchargement" draggable="false">
+
+	</script>
+	<script src="./pv_files/definers.js.téléchargement" draggable="false">
+
+	</script>
+
+	<script src="./pv_files/socket.io.js.téléchargement">
+</script>
+    <style>
+    
+    	@font-face {
+			font-family: "8bit";
+			src: url("./assets/fonts/8bit.ttf")
+		}
+
+		body {
+			font-family: "8bit";
+			background-color: transparent;
+			background-position: 0 0;
+			background-size: 100% 100%;
+			color: white;
+			text-align: center;
+			overflow: hidden;
+		}
+    .imageContainer {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+background-color: black;
+    border: 3px solid gray;
+border-radius:100px
+}
+.imageCenterer {
+  width: 1000px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -500px;
+}
+.imageCenterer img {
+  display: block;
+  margin: 0 auto;
+  width:20%;
+  image-rendering:pixelated;
+
+}</style>
+</head><body bgcolor="transparent" style="zoom:0.75"><div id="name" class="name" style="
+    width: 272px;
+    height: 54px;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 50px;
+    top: 63px;
+    left: 197px;
+    color: white;
+    text-align: center;
+    font-size: 2.2em;
+    
+">
+Roxas
+  
+</div><div id="pv" class="pv" style="
+    width: 442px;
+    height: 96px;
+    overflow: hidden;
+    position: absolute;
+    background-color: black;
+    border: 3px solid gray;
+    border-radius: 50px;
+    top: 100px;
+    left: 50px;
+">
+<div class="bar" id="bar" style="
+    width: 329px;
+    height: 67px;
+    overflow: hidden;
+    position: absolute;
+    background-color: red;
+    border: 3px solid gray;
+    border-radius: 50px;
+    top: 11px;
+    left: 95px;
+    color: white;
+    text-align: center;
+">
+    <div style="
+    width: 50%;
+    height: 67px;
+    overflow: hidden;
+    position: absolute;
+    background-color: lime;
+    top: 0;
+    left: 36px;
+    color: white;
+    text-align: center;
+">
+</div>
+</div>
+  
+</div>
+<div class="imageContainer">
+  <div class="imageCenterer">
+    <img id="perso1" src="./pv_files/idle.gif">
+    <script>
+      document.getElementById(`perso1`).src = './assets/characters/' + localStorage.type + '/idle.gif'
+      document.getElementById(`name`).innerText =  localStorage.name
+    </script>
+
+  </div>
+</div></body></html>
