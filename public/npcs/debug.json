@@ -1,20 +1,11 @@
 [
   {
-    "type": "Poule",
+    "type": "Chevre",
     "name": "Larry",
     "id": "Larry",
-    "dir": 1,
-    "x": 6,
-    "y": 8,
-    "dialog": "start"
-  },
-  {
-    "type": "Chevre",
-    "name": "Eugene",
-    "id": "Eugene",
     "dir": -1,
     "x": 15,
-    "y": 5,
-    "dialog": ""
+    "y": 0,
+    "dialog": "start"
   }
 ]

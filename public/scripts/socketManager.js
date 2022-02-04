@@ -26,7 +26,7 @@ function coming(){
 		y: myCoordY,
 		dir: myDir,
 		id: myId,
-    name: localStorage.name, 
+		name: localStorage.name, 
 		type,
 	});
 	socket.emit('askExistingPlayers',null)

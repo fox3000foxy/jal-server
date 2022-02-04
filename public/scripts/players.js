@@ -48,7 +48,6 @@ function createNPC(n){
 	return npcElement
 }
 
-
 getPlayer = (id)=>{return document.getElementById("player"+id)}
 
 var type = localStorage.type

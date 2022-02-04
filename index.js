@@ -1,5 +1,4 @@
 //Constants
-const mode = process.argv[0]
 const PORT = (process.env.PORT || 4300)
 let id = 0
 let actualPlayers = {}
@@ -62,12 +61,15 @@ io.on('connection', (socket) => {
     })
   })
 
-  socket.on("saveMap",({mapName,mapDataEdited,npcDataEdited})=>{
+  socket.on("saveMap",({mapName,mapDataEdited,npcDataEdited,warpDataEdited})=>{
     fs.writeFileSync("./public/maps/"+mapName+".json",
       JSON.stringify(mapDataEdited,null,2)
     )
 	fs.writeFileSync("./public/npcs/"+mapName+".json",
       JSON.stringify(npcDataEdited,null,2)
+    )
+	fs.writeFileSync("./public/warps/"+mapName+".json",
+      JSON.stringify(warpDataEdited,null,2)
     )
   })
 
@@ -89,12 +91,22 @@ io.on('connection', (socket) => {
 	  for (i=0;i<10;i++) {
 		createdArray.push(lineLength)
 	  }
-		fs.writeFileSync("./public/maps/"+msg+".json",
-		  JSON.stringify(createdArray,null,2)
-		)
+		fs.writeFileSync("./public/maps/"+msg+".json",JSON.stringify(createdArray,null,2))
+		fs.writeFileSync("./public/npcs/"+msg.mapName+".json",JSON.stringify([],null,2))
+		fs.writeFileSync("./public/warps/"+msg.mapName+".json",JSON.stringify([],null,2))
+
   })
+  
+  // socket.on('missingFile',(msg) => {
+		// fs.writeFileSync("./public/"+msg.label+"/"+msg.mapName+".json",
+		  // JSON.stringify([],null,2)
+		// )
+  // })
+  
   socket.on('deleteMap',(msg) => {
 	fs.unlinkSync("./public/maps/"+msg+".json")
+	fs.unlinkSync("./public/npcs/"+msg+".json")
+	fs.unlinkSync("./public/warps/"+msg+".json")
   })
 
   socket.on('coming', (msg) => {

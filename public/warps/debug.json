@@ -1,0 +1,11 @@
+[
+  {
+    "id": "warp1",
+    "warpDestination": "plage",
+    "warpDestinationX": 1,
+    "warpDestinationY": 1,
+    "x": 9,
+    "y": 3,
+    "direction": "right"
+  }
+]

@@ -1,3 +1,4 @@
+debugMode = 0
 width = 60
 height = width * 3 / 4
 
@@ -29,6 +30,7 @@ if(location.href.indexOf("index.html")!=-1) {
   mapBox = document.getElementById('mapBox')
   playersList = document.getElementById('players')
 }
+
 
 //Main functions
 function QueryStringToJSON() {

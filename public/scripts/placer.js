@@ -22,29 +22,58 @@ function place() {
       var tileElement = document.createElement('img')
       //tile = window[tile]
       if (structures.indexOf(tile) != -1) {
+		var foundationElement = document.createElement('img')
+		foundationElement.src = `assets/tiles/stone.png`
+		foundationElement.style.left = tileLeft + "px"
+		foundationElement.style.top = tileTop + "px"
+		foundationElement.setAttribute('tile', '')
+		foundationElement.setAttribute('tileName',tile)
+        foundationElement.setAttribute('isometric', '')
+		mapElement.appendChild(foundationElement)
+		  
+		  
         tileLeft -= 23;
         tileTop -= 105;
         tileElement.src = `assets/structures/${tile}.png`
-        document.addEventListener('keydown', () => {
+        setInterval(() => {
           //console.log()
 
           let strucBottom = tileTop + parseInt(mapBox.style.top)
           let playerBottom = getPlayer('me').getBoundingClientRect().top
           //TODO
-          //let strucLeft = tileLeft + parseInt(mapBox.style.left)
           //console.log(strucLeft)
-          //let playerLeft = getPlayer('me').getBoundingClientRect().left
+          let strucLeft = tileElement.getBoundingClientRect().left
+          let playerLeft = getPlayer('me').getBoundingClientRect().left
 
-          //console.log(strucLeft - playerLeft)
-          if ((strucBottom - playerBottom) > 0) {
+          // console.log(strucBottom - playerBottom)
+		  if(
+			strucLeft - playerLeft > 20 ||
+			strucLeft - playerLeft < -86 ||
+			strucBottom - playerBottom > 290
+		  ) 
+		  {
+            tileElement.style.opacity = "1"
+			return
+		  }
+          // console.log(strucLeft - playerLeft)
+          console.log(
+			// "Left:",(strucLeft - playerLeft),
+			// "Top:",(strucBottom - playerBottom)
+			)
+			if (
+				((strucLeft - playerLeft) > -84 && (strucBottom - playerBottom) > -23) ||
+				((strucLeft - playerLeft) > 18 && (strucBottom - playerBottom) > 50)
+			) {
             //console.log("Behind")
-            getPlayer("me").style.zIndex = "2"
+			tileElement.style.opacity = "50%"
+			getPlayer('me').style.zIndex = "2"
           }
           else {
             //console.log("Before")
-            getPlayer("me").style.zIndex = "4"
+            tileElement.style.opacity = "1"
+			getPlayer('me').style.zIndex = "4"
           }
-        })
+        },50)
       }
       else {
         tileElement.src = `assets/tiles/${tile}.png`
@@ -52,10 +81,11 @@ function place() {
       }
       tileElement.setAttribute('tile', '')
       tileElement.setAttribute('tileName',tile)
+	  // tileElement.style.zIndex = "1"
       tileElement.style.left = tileLeft + "px"
       tileElement.style.top = tileTop + "px"
       if(AllStructures.indexOf(tile)!=-1) tileElement.style.zIndex = "3"
-      else tileElement.style.zIndex = "1"
+      // else tileElement.style.zIndex = "1"
       mapElement.appendChild(tileElement)
     })
   })

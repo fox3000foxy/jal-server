@@ -1,0 +1,11 @@
+[
+  {
+    "type": "Chevre",
+    "name": "HiLarry",
+    "id": "HiLarry",
+    "dir": 1,
+    "x": 0,
+    "y": 2,
+    "dialog": "start"
+  }
+]

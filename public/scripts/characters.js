@@ -30,8 +30,8 @@ function CreateCharacter(characterElement) {
     character.src = idleSrc
     character.style.left = "0px"
     character.style.top = "0px"
-    character.style.zIndex = "1"
-    characterElement.style.zIndex = "2"
+    character.style.zIndex = "4"
+    characterElement.style.zIndex = "4"
 
     characterShadow.src = character.src
     characterShadow.setAttribute('class', 'characterShadow')
@@ -44,11 +44,12 @@ function CreateCharacter(characterElement) {
     collisionBox.setAttribute('class', 'collisionBox')
     // /* Color the collision box of player*/ collisionBox.style.backgroundColor = 'green'
     collisionBox.style.position = 'absolute'
-    collisionBox.style.width = '36px'
+    collisionBox.style.width = '40px'
     collisionBox.style.height = '1px'
     collisionBox.style.left = '2px'
     collisionBox.style.top = '57px'
     collisionBox.style.zIndex = '3'
+	if(debugMode) collisionBox.style.background = "lime"
 
     nameTag = document.createElement('div')
     nameTag.setAttribute('class', 'nameTag')
@@ -179,7 +180,7 @@ function CreateCharacter(characterElement) {
                     }
                 })
             })
-            if (pressed.up || pressed.down || pressed.left || pressed.right || !self.jumpingFinished) {
+            if ((pressed.up || pressed.down || pressed.left || pressed.right || !self.jumpingFinished) && warping==false) {
                 localStorage.coordinates = JSON.stringify({
                     x: mapBox.style.left,
                     y: mapBox.style.top,
